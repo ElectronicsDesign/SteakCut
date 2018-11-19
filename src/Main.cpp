@@ -21,13 +21,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	int Mouse = GetMouseInput();
-	int Handle = LoadSoundMem("kitchen-knife-cut3.mp3");
+	int Handle = LoadSoundMem("./snd/Start.mp3");
 
 	SetMouseDispFlag(TRUE);
 	StringCr = GetColor(255, 255, 255);
 
 	BoxCr = GetColor(0, 0, 0);
 
+	ChangeVolumeSoundMem(255 * 20, Handle);
+	PlaySoundMem(Handle, DX_PLAYTYPE_BACK); // 効果音を再生する
 
 
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
@@ -44,25 +46,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		ScreenFlip();//裏画面を表画面に反映
 
-		lstrcpy(StrBuf, "座標 Ｘ"); // 文字列"座標 Ｘ"をStrBufにコピー	
+		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
 		_itoa(MouseX, StrBuf2, 10); // MouseXの値を文字列にしてStrBuf2に格納
 		lstrcat(StrBuf, StrBuf2); // StrBufの内容にStrBuf2の内容を付け足す
-		lstrcat(StrBuf, "　Ｙ "); // StrBufの内容に文字列"Ｙ"を付け足す
+		lstrcat(StrBuf, " Y "); // StrBufの内容に文字列"Ｙ"を付け足す
 		_itoa(MouseY, StrBuf2, 10); // MouseYの値を文字列にしてStrBuf2に格納
 		lstrcat(StrBuf, StrBuf2); // StrBufの内容にStrBuf2の内容を付け足す
 
 		DrawBox(0, 0, 200, 32, BoxCr, TRUE);
 
 		DrawString(0, 0, StrBuf, StringCr);
-		DrawFormatString(0, 20,0xffffff,"%d",image);
+		DrawFormatString(0, 20, 0xffffff, "%d", image);
 		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
+		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
 
-		if (Mouse & MOUSE_INPUT_RIGHT) {
-			PlaySoundMem(Handle, DX_PLAYTYPE_BACK); // 効果音を再生する
-		}
+
+	
 
 	}
 
 	DxLib_End();
 	return 0;
 }
+
