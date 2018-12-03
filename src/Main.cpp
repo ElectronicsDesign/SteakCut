@@ -9,7 +9,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	int image = LoadGraph("./img/Knife_a.png");
 	int imgBack = LoadGraph("./img/Main.png");
+	int Handle = LoadSoundMem("./snd/Start.mp3");
+	int Handle1 = LoadSoundMem("./snd/Center.mp3");
 	int imgmiddle[4];
+	int counter = 0;
+
+	int steakX[4] = { 180, 304, 428 };
+	int steakY[4] = { 200, 200, 200 };
+
 
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
@@ -22,12 +29,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		return -1;    // エラーが起きたら直ちに終了
 	}
-
-	//int Mouse = GetMouseInput();
-	int Handle = LoadSoundMem("./snd/Start.mp3");
-	int Handle1 = LoadSoundMem("./snd/Center.mp3");
-
-
 
 	SetMouseDispFlag(TRUE);
 	StringCr = GetColor(255, 255, 255);
@@ -48,14 +49,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		DrawRotaGraph(300, 250, 0.5, 0.0, imgBack, TRUE);
 
-		DrawRotaGraph(180, 200, 0.46, 0.0, imgmiddle[0], TRUE);
-		DrawRotaGraph(304, 200, 0.46, 0.0, imgmiddle[1], TRUE);
-		DrawRotaGraph(428, 200, 0.46, 0.0, imgmiddle[2], TRUE);
+		DrawRotaGraph(steakX[0], steakY[0], 0.46, 0.0, imgmiddle[0], TRUE);
+		DrawRotaGraph(steakX[1], steakY[1], 0.46, 0.0, imgmiddle[1], TRUE);
+		DrawRotaGraph(steakX[2], steakY[2], 0.46, 0.0, imgmiddle[2], TRUE);
 
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
 
 
 		ScreenFlip();//裏画面を表画面に反映
+
+
 
 		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
 		_itoa(MouseX, StrBuf2, 10); // MouseXの値を文字列にしてStrBuf2に格納
@@ -77,6 +80,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		else {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
+		}
+
+		if ((MouseX > 129) && (MouseX < 516)) {
+			if ((MouseY > 150) && (MouseY < 200)) {
+				counter++;
+				if (counter == 30) {
+					steakX[0]--;
+					counter = 0;
+				}
+			}
+		}
+
+		if ((MouseY > 150) && (MouseY < 220)) {
+			if ((MouseX > 129) && (MouseX < 496)) {
+				counter++;
+				if (counter == 30) {
+					steakX[0]--;
+					counter = 0;
+				}
+			}
 		}
 
 	}
