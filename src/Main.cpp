@@ -10,9 +10,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int image = LoadGraph("./img/Knife_a.png");
 	int imgBack = LoadGraph("./img/Main.png");
 	int imgmiddle = LoadGraph("./img/meet_main.png");
-	int imgmiddle3 = LoadGraph("./img/meet_g2.png");
-	int imgmiddle4 = LoadGraph("./img/meet_g3.png");
-	int imgmiddle5 = LoadGraph("./img/meet_g1.png");
+
+
+	int i = 0;
+	int b = 0;
 
 	char StrBuf[128], StrBuf2[32];
 	int MouseX, MouseY;
@@ -34,28 +35,21 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	BoxCr = GetColor(0, 0, 0);
 
-	ChangeVolumeSoundMem(0 * 30/100, Handle);
-	ChangeVolumeSoundMem(0 * 50/ 100, Handle1);
+	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
+	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
 
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
 
-		int x, y;
+		int x, y,m,n;
 		int Mouse = GetMouseInput();
 		GetMousePoint(&x, &y);
+		GetMousePoint(&m, &n);
 		GetMousePoint(&MouseX, &MouseY);
 
 		DrawRotaGraph(300, 250, 0.5, 0.0, imgBack, TRUE);
-
-		if ((Mouse & MOUSE_INPUT_LEFT) != 0) {
-			DrawRotaGraph(450, 200, 0.2, 0.0, imgmiddle3, TRUE);
-			DrawRotaGraph(350, 200, 0.2, 0.0, imgmiddle4, TRUE);
-			DrawRotaGraph(145, 200, 0.2, 0.0, imgmiddle5, TRUE);
-		}
-		else {
-			DrawRotaGraph(300, 200, 0.5, 0.0, imgmiddle, TRUE);
-		}
+		DrawRotaGraph(300, 200, 0.5, 0.0, imgmiddle, TRUE);
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
 
 
@@ -74,23 +68,38 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawFormatString(0, 20, 0xffffff, "%d", image);
 		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
 		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
+		DrawFormatString(0, 80, 0xffffff, "%d", i);
 
-
-		if ((Mouse & MOUSE_INPUT_LEFT)!=0){
+		if ((Mouse & MOUSE_INPUT_LEFT) != 0) {
 			PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 		else {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 
-		
 
+			if ((MouseX > 129) && (MouseX < 496)) {
+				if ((MouseY > 150) && (MouseY < 200)) {
+					b++;
+					if (b == 70) {
+						i++;
+						b = 0;
+					}
+				}
+			}
 
+			if ((MouseY > 150) && (MouseY < 200)) {
+				if ((MouseX > 129) && (MouseX < 496)) {
+					b++;
+					if (b == 70) {
+						i++;
+						b = 0;
+					}
+				}
+			}
 	
-
 	}
 
 	DxLib_End();
 	return 0;
 }
-
