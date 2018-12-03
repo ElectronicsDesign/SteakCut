@@ -6,19 +6,27 @@ int counter = 0;
 int steakX[4] = { 180, 304, 428 };
 int steakY[4] = { 200, 200, 200 };
 int MouseX, MouseY;
+int Handle1;
+int AudioCounter = 0;
+bool AudioPlay = false;
 char Key[256];
 
 void AreaCheckA();
 void AreaCheckB();
+void AudioCheck();
+void CutAudioStart();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1; //初期化処理
 
+	int SoundCounter = 0;
 	int image = LoadGraph("./img/Knife_a.png");
 	int imgBack = LoadGraph("./img/Main.png");
 	int Handle = LoadSoundMem("./snd/Start.mp3");
-	int Handle1 = LoadSoundMem("./snd/Center.mp3");
 	int imgmiddle[4];
+
+	//音量大きめの焼く音を代入
+	Handle1 = LoadSoundMem("./snd/Center.mp3");
 
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
@@ -48,18 +56,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GetMousePoint(&x, &y);
 		GetMousePoint(&MouseX, &MouseY);
 
+		//各種画像の読み込み
 		DrawRotaGraph(300, 250, 0.5, 0.0, imgBack, TRUE);
-
 		DrawRotaGraph(steakX[0], steakY[0], 0.46, 0.0, imgmiddle[0], TRUE);
 		DrawRotaGraph(steakX[1], steakY[1], 0.46, 0.0, imgmiddle[1], TRUE);
 		DrawRotaGraph(steakX[2], steakY[2], 0.46, 0.0, imgmiddle[2], TRUE);
-
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
 
 
 		ScreenFlip();//裏画面を表画面に反映
-
-
 
 		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
 		_itoa(MouseX, StrBuf2, 10); // MouseXの値を文字列にしてStrBuf2に格納
@@ -70,19 +75,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		DrawBox(0, 0, 200, 32, BoxCr, TRUE);
 
+		//デバッグ用(メモリにロードできているか確認)
 		DrawString(0, 0, StrBuf, StringCr);
 		DrawFormatString(0, 20, 0xffffff, "%d", image);
 		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
 		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
+		DrawFormatString(0, 80, 0xffffff, "%d", Handle1);
 
-
-		if ((Mouse & MOUSE_INPUT_LEFT) != 0) {
-			PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
-		}
-		else {
+		//10秒の音源のため10秒に1回再生
+		if (SoundCounter % 600 == 0) {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 
+		AudioCheck();	//マウス動作後の効果音再生状態チェック
 		AreaCheckA();	//左の肉を動かすかチェック
 		AreaCheckB();	//右の肉を動かすかチェック
 
@@ -99,6 +104,7 @@ void AreaCheckA() {
 			if (counter == 30) {
 				steakX[0]--;
 				counter = 0;
+				CutAudioStart();
 			}
 		}
 	}
@@ -109,6 +115,7 @@ void AreaCheckA() {
 			if (counter == 30) {
 				steakX[0]--;
 				counter = 0;
+				CutAudioStart();
 			}
 		}
 	}
@@ -121,6 +128,7 @@ void AreaCheckB() {
 			if (counter == 30) {
 				steakX[2]++;
 				counter = 0;
+				CutAudioStart();
 			}
 		}
 	}
@@ -131,7 +139,25 @@ void AreaCheckB() {
 			if (counter == 30) {
 				steakX[2]++;
 				counter = 0;
+				CutAudioStart();
 			}
 		}
+	}
+}
+
+void AudioCheck() {
+	if (AudioPlay == true) {
+		AudioCounter++;
+		if (AudioCounter % 600 == 0) {
+			AudioPlay = false;
+			AudioCounter = 0;
+		}
+	}
+}
+
+void CutAudioStart() {
+	if (AudioPlay == false) {
+		PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE);
+		AudioPlay = true;
 	}
 }
