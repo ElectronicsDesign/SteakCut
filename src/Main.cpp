@@ -31,6 +31,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 
+
+	int i = 0;
+	int b = 0;
+
 	char StrBuf[128], StrBuf2[32];
 	int StringCr, BoxCr;
 
@@ -51,9 +55,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
 
-		int x, y;
+		int x, y,m,n;
 		int Mouse = GetMouseInput();
 		GetMousePoint(&x, &y);
+		GetMousePoint(&m, &n);
 		GetMousePoint(&MouseX, &MouseY);
 
 		//各種画像の読み込み
@@ -80,6 +85,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawFormatString(0, 20, 0xffffff, "%d", image);
 		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
 		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
+
 		DrawFormatString(0, 80, 0xffffff, "%d", Handle1);
 
 		//10秒の音源のため10秒に1回再生
@@ -90,13 +96,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
 		AreaCheckA();	//左の肉を動かすかチェック
 		AreaCheckB();	//右の肉を動かすかチェック
-
 	}
 
 	DxLib_End();
 	return 0;
 }
-
 void AreaCheckA() {
 	if ((MouseX > 200) && (MouseX < 270)) {
 		if ((MouseY > 180) && (MouseY < 200)) {
