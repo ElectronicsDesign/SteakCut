@@ -1,8 +1,15 @@
-# define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
 
-
+//グローバル変数の定義
+int counter = 0;
+int steakX[4] = { 180, 304, 428 };
+int steakY[4] = { 200, 200, 200 };
+int MouseX, MouseY;
 char Key[256];
+
+void AreaCheckA();
+void AreaCheckB();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1; //初期化処理
@@ -12,17 +19,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	int Handle = LoadSoundMem("./snd/Start.mp3");
 	int Handle1 = LoadSoundMem("./snd/Center.mp3");
 	int imgmiddle[4];
-	int counter = 0;
-
-	int steakX[4] = { 180, 304, 428 };
-	int steakY[4] = { 200, 200, 200 };
-
 
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 
 	char StrBuf[128], StrBuf2[32];
-	int MouseX, MouseY;
 	int StringCr, BoxCr;
 
 	if (DxLib_Init() == -1)    // ＤＸライブラリ初期化処理
@@ -35,8 +36,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	BoxCr = GetColor(0, 0, 0);
 
-	ChangeVolumeSoundMem(255 * 30/100, Handle);
-	ChangeVolumeSoundMem(255 * 50/ 100, Handle1);
+	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
+	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
 
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
@@ -75,32 +76,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
 
 
-		if ((Mouse & MOUSE_INPUT_LEFT)!=0){
+		if ((Mouse & MOUSE_INPUT_LEFT) != 0) {
 			PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 		else {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 
-		if ((MouseX > 129) && (MouseX < 516)) {
-			if ((MouseY > 150) && (MouseY < 200)) {
-				counter++;
-				if (counter == 30) {
-					steakX[0]--;
-					counter = 0;
-				}
-			}
-		}
-
-		if ((MouseY > 150) && (MouseY < 220)) {
-			if ((MouseX > 129) && (MouseX < 496)) {
-				counter++;
-				if (counter == 30) {
-					steakX[0]--;
-					counter = 0;
-				}
-			}
-		}
+		AreaCheckA();	//左の肉を動かすかチェック
+		AreaCheckB();	//右の肉を動かすかチェック
 
 	}
 
@@ -108,3 +92,46 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
+void AreaCheckA() {
+	if ((MouseX > 200) && (MouseX < 270)) {
+		if ((MouseY > 180) && (MouseY < 200)) {
+			counter++;
+			if (counter == 30) {
+				steakX[0]--;
+				counter = 0;
+			}
+		}
+	}
+
+	if ((MouseY > 180) && (MouseY < 220)) {
+		if ((MouseX > 200) && (MouseX < 270)) {
+			counter++;
+			if (counter == 30) {
+				steakX[0]--;
+				counter = 0;
+			}
+		}
+	}
+}
+
+void AreaCheckB() {
+	if ((MouseX > 350) && (MouseX < 516)) {
+		if ((MouseY > 150) && (MouseY < 200)) {
+			counter++;
+			if (counter == 30) {
+				steakX[2]++;
+				counter = 0;
+			}
+		}
+	}
+
+	if ((MouseY > 150) && (MouseY < 220)) {
+		if ((MouseX > 350) && (MouseX < 496)) {
+			counter++;
+			if (counter == 30) {
+				steakX[2]++;
+				counter = 0;
+			}
+		}
+	}
+}
