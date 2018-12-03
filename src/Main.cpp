@@ -9,7 +9,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	int image = LoadGraph("./img/Knife_a.png");
 	int imgBack = LoadGraph("./img/Main.png");
-	int imgmiddle = LoadGraph("./img/meet_main.png");
+	int imgmiddle[4];
+
+	//画像を分割してロード
+	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 
 	char StrBuf[128], StrBuf2[32];
 	int MouseX, MouseY;
@@ -44,7 +47,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GetMousePoint(&MouseX, &MouseY);
 
 		DrawRotaGraph(300, 250, 0.5, 0.0, imgBack, TRUE);
-		DrawRotaGraph(300, 200, 0.5, 0.0, imgmiddle, TRUE);
+
+		DrawRotaGraph(180, 200, 0.46, 0.0, imgmiddle[0], TRUE);
+		DrawRotaGraph(304, 200, 0.46, 0.0, imgmiddle[1], TRUE);
+		DrawRotaGraph(428, 200, 0.46, 0.0, imgmiddle[2], TRUE);
+
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
 
 
@@ -71,11 +78,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		else {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
-
-		
-
-
-	
 
 	}
 
