@@ -1,6 +1,5 @@
 #pragma once
 
-void AreaCheckA();
-void AreaCheckB();
+void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft);
 void AudioCheck();
 void CutAudioStart();

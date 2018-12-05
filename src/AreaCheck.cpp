@@ -2,7 +2,6 @@
 
 extern int counter;
 extern int steakX[4];
-extern int steakY[4];
 extern int MouseX, MouseY;
 extern int Handle1;
 extern int AudioCounter;
@@ -15,47 +14,34 @@ void CutAudioStart() {
 	}
 }
 
-void AreaCheckA() {
-	if ((MouseX > 200) && (MouseX < 270)) {
-		if ((MouseY > 180) && (MouseY < 200)) {
+void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
+	if ((MouseX > xMin) && (MouseX < xMax)) {
+		if ((MouseY > yMin) && (MouseY < yMax)) {
 			counter++;
 			if (counter == 30) {
-				steakX[0]--;
+				if (goLeft == true) {
+				steakX[group]--;
+				}
+				else {
+				steakX[group]++;
+				}
+				
 				counter = 0;
 				CutAudioStart();
 			}
 		}
 	}
 
-	if ((MouseY > 180) && (MouseY < 220)) {
-		if ((MouseX > 200) && (MouseX < 270)) {
+	if ((MouseY > yMin) && (MouseY < yMax)) {
+		if ((MouseX > xMin) && (MouseX < xMax)) {
 			counter++;
 			if (counter == 30) {
-				steakX[0]--;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-}
-
-void AreaCheckB() {
-	if ((MouseX > 350) && (MouseX < 516)) {
-		if ((MouseY > 150) && (MouseY < 200)) {
-			counter++;
-			if (counter == 30) {
-				steakX[2]++;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-
-	if ((MouseY > 150) && (MouseY < 220)) {
-		if ((MouseX > 350) && (MouseX < 496)) {
-			counter++;
-			if (counter == 30) {
-				steakX[2]++;
+				if (goLeft == true) {
+					steakX[group]--;
+				}
+				else {
+					steakX[group]++;
+				}
 				counter = 0;
 				CutAudioStart();
 			}

@@ -40,6 +40,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	BoxCr = GetColor(0, 0, 0);
 
+	//音量変更
 	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
@@ -82,10 +83,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
-		AreaCheckA();	//左の肉を動かすかチェック
-		AreaCheckB();	//右の肉を動かすかチェック
+		AreaCheck(280, 200, 200, 150, 0, true);		//左の肉を動かすかチェック
+		AreaCheck(430, 350, 200, 150, 2, false);	//右の肉を動かすかチェック
 	}
 
 	DxLib_End();
 	return 0;
 }
+
