@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
+#include "AreaCheck.h"
 
 //グローバル変数の定義
 int counter = 0;
@@ -10,12 +11,6 @@ int Handle1;
 int AudioCounter = 0;
 bool AudioPlay = false;
 char Key[256];
-
-//関数定義
-void AreaCheckA();
-void AreaCheckB();
-void AudioCheck();
-void CutAudioStart();
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1; //初期化処理
@@ -51,7 +46,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
 
-		int x, y,m,n;
+		int x, y, m, n;
 		int Mouse = GetMouseInput();
 		GetMousePoint(&x, &y);
 		GetMousePoint(&m, &n);
@@ -63,7 +58,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawRotaGraph(steakX[1], steakY[1], 0.46, 0.0, imgmiddle[1], TRUE);
 		DrawRotaGraph(steakX[2], steakY[2], 0.46, 0.0, imgmiddle[2], TRUE);
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
-		
+
 		ScreenFlip();//裏画面を表画面に反映
 
 		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
@@ -93,68 +88,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	DxLib_End();
 	return 0;
-}
-void AreaCheckA() {
-	if ((MouseX > 200) && (MouseX < 270)) {
-		if ((MouseY > 180) && (MouseY < 200)) {
-			counter++;
-			if (counter == 30) {
-				steakX[0]--;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-
-	if ((MouseY > 180) && (MouseY < 220)) {
-		if ((MouseX > 200) && (MouseX < 270)) {
-			counter++;
-			if (counter == 30) {
-				steakX[0]--;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-}
-
-void AreaCheckB() {
-	if ((MouseX > 350) && (MouseX < 516)) {
-		if ((MouseY > 150) && (MouseY < 200)) {
-			counter++;
-			if (counter == 30) {
-				steakX[2]++;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-
-	if ((MouseY > 150) && (MouseY < 220)) {
-		if ((MouseX > 350) && (MouseX < 496)) {
-			counter++;
-			if (counter == 30) {
-				steakX[2]++;
-				counter = 0;
-				CutAudioStart();
-			}
-		}
-	}
-}
-
-void AudioCheck() {
-	if (AudioPlay == true) {
-		AudioCounter++;
-		if (AudioCounter % 600 == 0) {
-			AudioPlay = false;
-			AudioCounter = 0;
-		}
-	}
-}
-
-void CutAudioStart() {
-	if (AudioPlay == false) {
-		PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE);
-		AudioPlay = true;
-	}
 }
