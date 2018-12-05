@@ -11,6 +11,7 @@ int AudioCounter = 0;
 bool AudioPlay = false;
 char Key[256];
 
+//関数定義
 void AreaCheckA();
 void AreaCheckB();
 void AudioCheck();
@@ -31,10 +32,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 
-
-	int i = 0;
-	int b = 0;
-
 	char StrBuf[128], StrBuf2[32];
 	int StringCr, BoxCr;
 
@@ -51,7 +48,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
-
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
 
@@ -67,8 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawRotaGraph(steakX[1], steakY[1], 0.46, 0.0, imgmiddle[1], TRUE);
 		DrawRotaGraph(steakX[2], steakY[2], 0.46, 0.0, imgmiddle[2], TRUE);
 		DrawRotaGraph(x, y, 0.5, 0.0, image, TRUE);
-
-
+		
 		ScreenFlip();//裏画面を表画面に反映
 
 		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
@@ -85,14 +80,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		DrawFormatString(0, 20, 0xffffff, "%d", image);
 		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
 		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
-
 		DrawFormatString(0, 80, 0xffffff, "%d", Handle1);
 
 		//10秒の音源のため10秒に1回再生
 		if (SoundCounter % 600 == 0) {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
-
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
 		AreaCheckA();	//左の肉を動かすかチェック
 		AreaCheckB();	//右の肉を動かすかチェック
