@@ -30,10 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	char StrBuf[128], StrBuf2[32];
 	int StringCr, BoxCr;
 
-	if (DxLib_Init() == -1)    // ＤＸライブラリ初期化処理
-	{
-		return -1;    // エラーが起きたら直ちに終了
-	}
+	if (DxLib_Init() == -1){return -1;} //初期化&エラーチェック
 
 	SetMouseDispFlag(TRUE);
 	StringCr = GetColor(255, 255, 255);
@@ -46,6 +43,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
+
+		if (Key[KEY_INPUT_LSHIFT]) {
+			ResetArea();
+		}
 
 		int x, y, m, n;
 		int Mouse = GetMouseInput();
@@ -73,10 +74,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		//デバッグ用(メモリにロードできているか確認)
 		DrawString(0, 0, StrBuf, StringCr);
-		DrawFormatString(0, 20, 0xffffff, "%d", image);
-		DrawFormatString(0, 40, 0xffffff, "%d", imgBack);
-		DrawFormatString(0, 60, 0xffffff, "%d", Handle);
-		DrawFormatString(0, 80, 0xffffff, "%d", Handle1);
 
 		//10秒の音源のため10秒に1回再生
 		if (SoundCounter % 600 == 0) {
@@ -90,4 +87,3 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DxLib_End();
 	return 0;
 }
-
