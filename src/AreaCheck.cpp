@@ -59,3 +59,12 @@ void AudioCheck() {
 		}
 	}
 }
+
+void ResetArea() {
+	counter = 0;
+	steakX[0] = 180;
+	steakX[1] = 304;
+	steakX[2] = 428;
+	AudioCounter = 0;
+	AudioPlay = false;
+}
