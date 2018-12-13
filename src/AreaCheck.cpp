@@ -1,6 +1,5 @@
 #include "DxLib.h"
 
-//共通の変数使用
 extern int counter;
 extern int steakX[4];
 extern int MouseX, MouseY;
