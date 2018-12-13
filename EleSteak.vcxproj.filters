@@ -7,6 +7,15 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\MenuArea.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameMain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -20,6 +29,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AreaCheck.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MenuArea.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameMain.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\api.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
