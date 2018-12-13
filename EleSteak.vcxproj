@@ -32,6 +32,13 @@
     <ClInclude Include="src\Debug.h" />
     <ClInclude Include="src\GameMain.h" />
     <ClInclude Include="src\MenuArea.h" />
+    <ClInclude Include="src\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EleSteak.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="appicon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4A318D0E-98DC-48B3-A2AA-FB8E11A917E1}</ProjectGuid>

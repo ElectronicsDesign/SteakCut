@@ -52,7 +52,7 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 void AudioCheck() {
 	if (AudioPlay == true) {
 		AudioCounter++;
-		if (AudioCounter % 600 == 0) {
+		if (AudioCounter % 450 == 0) {
 			AudioPlay = false;
 			AudioCounter = 0;
 		}
