@@ -2,6 +2,8 @@
 #include "DxLib.h"
 #include "MenuArea.h"
 #include "AreaCheck.h"
+#include "Debug.h"
+#include <stdio.h>
 
 //グローバル変数の定義
 int counter = 0;
@@ -30,7 +32,6 @@ void AppStart() {
 	//画像を分割してロード
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 
-	char StrBuf[128], StrBuf2[32];
 	int StringCr, BoxCr;
 
 	SetMouseDispFlag(TRUE);
@@ -42,15 +43,13 @@ void AppStart() {
 	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
+
 	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
 		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
 
 		if (Key[KEY_INPUT_LSHIFT] || Key[KEY_INPUT_RSHIFT]) { ResetArea(); }
 
-		int x, y, m, n;
 		int Mouse = GetMouseInput();
-		GetMousePoint(&x, &y);
-		GetMousePoint(&m, &n);
 		GetMousePoint(&MouseX, &MouseY);
 
 		//各種画像の読み込み
@@ -58,22 +57,15 @@ void AppStart() {
 		DrawRotaGraph(steakX[0], steakY[0], 0.9, 0.0, imgmiddle[0], TRUE);
 		DrawRotaGraph(steakX[1], steakY[1], 0.9, 0.0, imgmiddle[1], TRUE);
 		DrawRotaGraph(steakX[2], steakY[2], 0.9, 0.0, imgmiddle[2], TRUE);
-		DrawRotaGraph(x, y, 0.6, 0.0, image, TRUE);
+		DrawRotaGraph(MouseX, MouseY, 0.6, 0.0, image, TRUE);
 
-		DrawString(1115, 0, "Shiftキーでリセット", GetColor(255, 255, 255));
+		DrawStringToHandle(1120, 0, "Shiftキーでリセット", GetColor(255, 255, 255), ASFont);
 
 		//デバッグ用
-		lstrcpy(StrBuf, "座標X"); // 文字列"座標 Ｘ"をStrBufにコピー	
-		_itoa(MouseX, StrBuf2, 10); // MouseXの値を文字列にしてStrBuf2に格納
-		lstrcat(StrBuf, StrBuf2); // StrBufの内容にStrBuf2の内容を付け足す
-		lstrcat(StrBuf, " Y "); // StrBufの内容に文字列"Ｙ"を付け足す
-		_itoa(MouseY, StrBuf2, 10); // MouseYの値を文字列にしてStrBuf2に格納
-		lstrcat(StrBuf, StrBuf2); // StrBufの内容にStrBuf2の内容を付け足す
-		DrawString(0, 0, StrBuf, StringCr);
+		OutXYData();
+		FPSPrint();
 
 		ScreenFlip();//裏画面を表画面に反映
-
-		DrawBox(0, 0, 200, 32, BoxCr, TRUE);
 
 		//10秒の音源のため10秒に1回再生
 		if (SoundCounter % 600 == 0) {
