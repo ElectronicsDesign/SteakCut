@@ -5,14 +5,22 @@
 #include "Debug.h"
 #include <stdio.h>
 
+typedef enum {
+	eScene_Load,
+	eScene_Menu,
+	eScene_Start,
+	eScene_Exit,
+	eScene_Standby,
+} eScene;
+
 //グローバル変数の定義
 int counter = 0;
 int steakX[4] = { 406, 648, 890 };
 int steakY[4] = { 380, 380, 380 };
-int MouseX, MouseY;
 int AudioCounter = 0;
 bool AudioPlay = false;
 extern int image, imgBack, Handle, Handle1;
+extern int MouseX, MouseY;
 extern int imgmiddle[4];
 static int SoundCounter = 0;
 char Key[256];
@@ -46,7 +54,8 @@ void AppStart() {
 			StopSoundMem(Handle);
 			StopSoundMem(Handle1);
 			ResetArea();
-			MenuOn();
+			Scene = eScene_Menu;
+			break;
 		}
 
 		GetMousePoint(&MouseX, &MouseY);
@@ -82,6 +91,4 @@ void AppStart() {
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
 		
 	}
-
-	DxLib_End();
 }

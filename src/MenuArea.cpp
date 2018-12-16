@@ -7,6 +7,7 @@ typedef enum {
 	eScene_Menu,
 	eScene_Start,
 	eScene_Exit,
+	eScene_Standby,
 } eScene;
 
 int Scene;
@@ -14,6 +15,7 @@ int ASFont;
 int ASBFont;
 int image, imgBack, Handle, Handle1;
 int imgmiddle[4];
+int MouseX, MouseY;
 bool DeviceStatus = false;
 static int FontControl;
 static int Background;
@@ -23,7 +25,7 @@ static bool loadStatus = false;
 void UpdateScene() {
 
 	if (CheckHitKey(KEY_INPUT_S) != 0) {
-		Scene = eScene_Start;
+		Scene = eScene_Standby;
 	}
 	if (CheckHitKey(KEY_INPUT_X) != 0) {
 		Scene = eScene_Exit;
@@ -53,6 +55,24 @@ void Menu() {
 	DrawStringToHandle(1210, 780, "Ver 1.5", GetColor(0, 0, 0), ASFont);
 
 }
+void Standby() {
+	int counter = 0;
+	DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
+	DrawStringToHandle(0, 0, "丸の部分にマウスを置いてクリックして下さい。Mキーを押すとメニューに戻れます。", GetColor(255, 255, 0), ASFont);
+	while (1) {
+		if (CheckHitKey(KEY_INPUT_M) == 1) {
+			Scene = eScene_Menu;
+			break;
+		}
+
+		GetMousePoint(&MouseX, &MouseY);
+		if (((MouseX >= 645) && (MouseX <= 655)) && ((MouseY >= 345) && (MouseY <= 355)) && ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)) {
+			Scene = eScene_Start;
+			break;
+		}
+	}
+
+}
 
 void StartApp() {
 	AppStart();
@@ -67,6 +87,9 @@ void MenuOn() {
 	Scene = eScene_Menu;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
 		switch (Scene) {
+			case eScene_Standby:
+				Standby();
+				break;
 			case eScene_Menu:
 				Menu();
 				break;
@@ -90,8 +113,7 @@ void LoadCheckImg() {
 				break;
 			}
 		}
-		DxLib_End();
-		exit(0);
+		ExitApp();
 	}
 }
 
@@ -104,13 +126,12 @@ void LoadCheckSnd() {
 				break;
 			}
 		}
-		DxLib_End();
-		exit(0);
+		ExitApp();
 	}
 }
 
 void LoadMem() {
-	DrawString(0, 0, "起動準備中...", GetColor(255, 255, 255));
+	DrawString(0, 0, "起動準備を開始...", GetColor(255, 255, 255));
 	DrawString(0, 20, "フォント準備中...", GetColor(255, 255, 255));
 
 	ASBFont = CreateFontToHandle(NULL, 20, 6, DX_FONTTYPE_ANTIALIASING_8X8);
