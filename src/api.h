@@ -1,5 +1,6 @@
 #pragma once
 
+bool AntiMem();
 int ConnectDevice();
 int DisconnectDevice();
 void ConnectStatus();

@@ -1,7 +1,7 @@
 #include "DxLib.h"
 
 extern int counter;
-extern int steakX[4];
+extern int steakX[3];
 extern int MouseX, MouseY;
 extern int Handle1;
 extern int AudioCounter;

@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
+#include "api.h"
 #include "MenuArea.h"
 #include "AreaCheck.h"
 #include "Debug.h"
@@ -15,8 +16,8 @@ typedef enum {
 
 //グローバル変数の定義
 int counter = 0;
-int steakX[4] = { 406, 648, 890 };
-int steakY[4] = { 380, 380, 380 };
+int steakX[3] = { 406, 648, 890 };
+int steakY[3] = { 380, 380, 380 };
 int AudioCounter = 0;
 bool AudioPlay = false;
 extern int image, imgBack, Handle, Handle1;
@@ -90,5 +91,10 @@ void AppStart() {
 		}
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
 		
+		if (AntiMem() == true) {
+			MessageBox(NULL, "メモリの改竄を検出したため終了します。", "Morikapu AntiCheat", MB_OK);
+			exit(2);
+		}
+
 	}
 }
