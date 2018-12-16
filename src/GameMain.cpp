@@ -10,12 +10,10 @@ int counter = 0;
 int steakX[4] = { 406, 648, 890 };
 int steakY[4] = { 380, 380, 380 };
 int MouseX, MouseY;
-int Handle1;
 int AudioCounter = 0;
 bool AudioPlay = false;
-static bool loadStatus = false;
-static 	int image, imgBack, Handle;
-static int imgmiddle[4];
+extern int image, imgBack, Handle, Handle1;
+extern int imgmiddle[4];
 static int SoundCounter = 0;
 char Key[256];
 
@@ -32,16 +30,6 @@ void ResetArea() {
 }
 
 void AppStart() {
-	if (loadStatus == false) {
-		image = LoadGraph("./img/Knife_a.png");
-		imgBack = LoadGraph("./img/Main.png");
-		Handle = LoadSoundMem("./snd/Start.mp3");
-		Handle1 = LoadSoundMem("./snd/Center.mp3");
-		LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
-
-		loadStatus = true;
-	}
-
 	SetMouseDispFlag(TRUE);
 
 	//âπó ïœçX
