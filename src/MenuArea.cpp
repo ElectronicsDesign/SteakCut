@@ -81,6 +81,34 @@ void MenuOn() {
 	}
 }
 
+void LoadCheckImg() {
+	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
+		DrawString(0, 60, "[ERROR : 0001] 画像の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", GetColor(255, 255, 255));
+		DrawString(0, 80, "何かキーを押すと終了します。", GetColor(255, 255, 255));
+		while (CheckHitKeyAll() == 0){
+			if (ProcessMessage() == -1){
+				break;
+			}
+		}
+		DxLib_End();
+		exit(0);
+	}
+}
+
+void LoadCheckSnd() {
+	if (Handle == -1 || Handle1 == -1) {
+		DrawString(0, 80, "[ERROR : 0002] 音源の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", GetColor(255, 255, 255));
+		DrawString(0, 100, "何かキーを押すと終了します。", GetColor(255, 255, 255));
+		while (CheckHitKeyAll() == 0) {
+			if (ProcessMessage() == -1) {
+				break;
+			}
+		}
+		DxLib_End();
+		exit(0);
+	}
+}
+
 void LoadMem() {
 	DrawString(0, 0, "起動準備中...", GetColor(255, 255, 255));
 	DrawString(0, 20, "フォント準備中...", GetColor(255, 255, 255));
@@ -90,16 +118,21 @@ void LoadMem() {
 	ASFont = CreateFontToHandle(NULL, -1, -1, DX_FONTTYPE_ANTIALIASING_8X8);
 
 	DrawString(0, 40, "画像をメモリに展開中...", GetColor(255, 255, 255));
-
 	image = LoadGraph("./img/Knife_a.png");
 	imgBack = LoadGraph("./img/Main.png");
-	Handle = LoadSoundMem("./snd/Start.mp3");
-	Handle1 = LoadSoundMem("./snd/Center.mp3");
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 	Background = LoadGraph("./img/MenuMain.jpg");
 	logo = LoadGraph("./img/logo.png");
 
-	DrawString(0, 60, "デバイスの接続検証中...", GetColor(255, 255, 255));
+	LoadCheckImg();
+
+	DrawString(0, 60, "音源をメモリに展開中...", GetColor(255, 255, 255));
+	Handle = LoadSoundMem("./snd/Start.mp3");
+	Handle1 = LoadSoundMem("./snd/Center.mp3");
+
+	LoadCheckSnd();
+
+	DrawString(0, 80, "デバイスの接続検証中...", GetColor(255, 255, 255));
 	ConnectStatus();
 
 	MenuOn();
