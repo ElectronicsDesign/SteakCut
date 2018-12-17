@@ -16,7 +16,7 @@ extern int steakY[3];
 static int x, y;
 static bool Cheat = false;
 static double CC;
-static int SSX[3][2] = { {406,380},{648,380},{890,380} };
+extern int SSX[3][2];
 
 
 bool AntiMem() {

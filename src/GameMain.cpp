@@ -18,6 +18,7 @@ typedef enum {
 int counter = 0;
 int steakX[3] = { 406, 648, 890 };
 int steakY[3] = { 380, 380, 380 };
+int SSX[3][2] = { {406,380},{648,380},{890,380} };
 int AudioCounter = 0;
 bool AudioPlay = false;
 extern int image, imgBack, Handle, Handle1;
@@ -34,6 +35,14 @@ void ResetArea() {
 	steakX[0] = 406;
 	steakX[1] = 648;
 	steakX[2] = 890;
+
+	SSX[0][0] = 406;
+	SSX[0][1] = 380;
+	SSX[1][0] = 648;
+	SSX[1][1] = 380;
+	SSX[2][0] = 890;
+	SSX[2][1] = 380;
+
 	AudioCounter = 0;
 	AudioPlay = false;
 }
@@ -60,6 +69,11 @@ void AppStart() {
 		}
 
 		GetMousePoint(&MouseX, &MouseY);
+
+		if (AntiMem() == true) {
+			MessageBox(NULL, "不正な操作を検出したため終了します。[ERROR:0003 メモリの改ざん検知]", "MW-Secure AntiCheat", MB_OK);
+			exit(2);
+		}
 
 		//各種画像の読み込み
 		DrawRotaGraph(650, 450, 1.0, 0.0, imgBack, TRUE);
@@ -90,11 +104,7 @@ void AppStart() {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
-		
-		if (AntiMem() == true) {
-			MessageBox(NULL, "メモリの改竄を検出したため終了します。", "Morikapu AntiCheat", MB_OK);
-			exit(2);
-		}
+
 
 	}
 }
