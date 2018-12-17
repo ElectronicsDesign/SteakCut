@@ -55,8 +55,8 @@ void AppStart() {
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
 
-	while (!ProcessMessage() && !ClearDrawScreen() && !GetHitKeyStateAll(Key) && !Key[KEY_INPUT_ESCAPE]) {
-		//↑メッセージ処理 ↑画面をクリア ↑キーボード入力状態取得 ↑ESCが押されていない
+	while (!ProcessMessage() && !ClearDrawScreen()) {
+		//↑メッセージ処理 ↑画面をクリア
 
 		if (Key[KEY_INPUT_R]) { ResetArea(); }
 
@@ -71,7 +71,7 @@ void AppStart() {
 		GetMousePoint(&MouseX, &MouseY);
 
 		if (AntiMem() == true) {
-			MessageBox(NULL, "不正な操作を検出したため終了します。[ERROR:0003 メモリの改ざん検知]", "MW-Secure AntiCheat", MB_OK);
+			MessageBox(NULL, "[ERROR:0003]不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
 			exit(2);
 		}
 

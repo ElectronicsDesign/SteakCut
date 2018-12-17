@@ -10,7 +10,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetWindowIconID(101);
 
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1;
+
+	LoadGraphScreen(240, 220, "./img/Devlogo.png", TRUE);
+	DrawString(450, 480, "‹N“®’† :", GetColor(255, 255, 255));
+	DrawBoxAA(550, 480, 720, 495, GetColor(255, 255, 255), FALSE);
+
 	LoadMem();
+	MenuOn();
 
 	return 0;
 }

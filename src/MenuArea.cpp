@@ -110,60 +110,48 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		DrawString(0, 60, "[ERROR : 0001] 画像の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", GetColor(255, 255, 255));
-		DrawString(0, 80, "何かキーを押すと終了します。", GetColor(255, 255, 255));
-		WaitKey();
+		MessageBox(NULL, "[ERROR : 0001] 画像の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		DrawString(0, 80, "[ERROR : 0002] 音源の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", GetColor(255, 255, 255));
-		DrawString(0, 100, "何かキーを押すと終了します。", GetColor(255, 255, 255));
-		WaitKey();
+		MessageBox(NULL, "[ERROR : 0002] 音源の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
 		ExitApp();
 	}
 }
 
 void LoadMem() {
-	DrawBoxAA(1100, 780, 1270, 795, GetColor(255, 255, 255), FALSE);
-
-
-	DrawString(0, 0, "起動準備を開始...", GetColor(255, 255, 255));
-	DrawBoxAA(1101, 781, 1120, 794, GetColor(0, 255, 65), TRUE);
-
-	DrawString(0, 20, "フォント準備中...", GetColor(255, 255, 255));
+	ScreenFlip();
+	DrawBoxAA(551, 481, 571, 494, GetColor(0, 255, 65), TRUE);
 
 	ASBFont = CreateFontToHandle(NULL, 20, 6, DX_FONTTYPE_ANTIALIASING_8X8);
 	FontControl = CreateFontToHandle(NULL, 40, 4, DX_FONTTYPE_ANTIALIASING_8X8);
 	ASFont = CreateFontToHandle(NULL, -1, -1, DX_FONTTYPE_ANTIALIASING_8X8);
-	DrawBoxAA(1120, 781, 1150, 794, GetColor(0, 255, 65), TRUE);
+	DrawBoxAA(570, 481, 590, 494, GetColor(0, 255, 65), TRUE);
+	ScreenFlip();
 
-	DrawString(0, 40, "画像をメモリに展開中...", GetColor(255, 255, 255));
 
 	image = LoadGraph("./img/Knife_a.png");
 	imgBack = LoadGraph("./img/Main.png");
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
 	Background = LoadGraph("./img/MenuMain.jpg");
 	logo = LoadGraph("./img/logo.png");
-	DrawBoxAA(1150, 781, 1220, 794, GetColor(0, 255, 65), TRUE);
+	DrawBoxAA(590, 481, 610, 494, GetColor(0, 255, 65), TRUE);
 
 	LoadCheckImg();
-	DrawBoxAA(1220, 781, 1230, 794, GetColor(0, 255, 65), TRUE);
-
-	DrawString(0, 60, "音源をメモリに展開中...", GetColor(255, 255, 255));
+	DrawBoxAA(610, 481, 630, 494, GetColor(0, 255, 65), TRUE);
+	ScreenFlip();
 
 	Handle = LoadSoundMem("./snd/Start.mp3");
 	Handle1 = LoadSoundMem("./snd/Center.mp3");
-	DrawBoxAA(1230, 781, 1250, 794, GetColor(0, 255, 65), TRUE);
+	DrawBoxAA(630, 481, 650, 494, GetColor(0, 255, 65), TRUE);
 
 	LoadCheckSnd();
-	DrawBoxAA(1250, 781, 1260, 794, GetColor(0, 255, 65), TRUE);
+	DrawBoxAA(650, 481, 660, 494, GetColor(0, 255, 65), TRUE);
+	ScreenFlip();
 
-	DrawString(0, 80, "デバイスの接続検証中...", GetColor(255, 255, 255));
 	ConnectStatus();
-	DrawBoxAA(1260, 781, 1269, 794, GetColor(0, 255, 65), TRUE);
-
-	MenuOn();
+	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);
 }
