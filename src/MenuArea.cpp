@@ -124,6 +124,7 @@ void LoadCheckSnd() {
 
 void LoadMem() {
 	ScreenFlip();
+	Sleep(5 * 100);
 	DrawBoxAA(551, 481, 571, 494, GetColor(0, 255, 65), TRUE);
 
 	ASBFont = CreateFontToHandle(NULL, 20, 6, DX_FONTTYPE_ANTIALIASING_8X8);
@@ -131,7 +132,6 @@ void LoadMem() {
 	ASFont = CreateFontToHandle(NULL, -1, -1, DX_FONTTYPE_ANTIALIASING_8X8);
 	DrawBoxAA(570, 481, 590, 494, GetColor(0, 255, 65), TRUE);
 	ScreenFlip();
-
 
 	image = LoadGraph("./img/Knife_a.png");
 	imgBack = LoadGraph("./img/Main.png");

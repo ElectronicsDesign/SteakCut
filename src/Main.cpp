@@ -11,7 +11,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1;
 
-	LoadGraphScreen(240, 220, "./img/Devlogo.png", TRUE);
+	if((LoadGraphScreen(240, 220, "./img/Devlogo.png", TRUE)) == -1){
+		MessageBox(NULL, "[ERROR : 0000] ファイルが不整合です。再インストールして下さい。", "EteakCut Start Error", MB_OK);
+		exit(9);
+	}
 	DrawString(450, 480, "起動中 :", GetColor(255, 255, 255));
 	DrawBoxAA(550, 480, 720, 495, GetColor(255, 255, 255), FALSE);
 
