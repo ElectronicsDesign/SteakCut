@@ -27,6 +27,7 @@
     <ClCompile Include="src\MenuArea.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\SpidarMouse.h" />
     <ClInclude Include="src\api.h" />
     <ClInclude Include="src\AreaCheck.h" />
     <ClInclude Include="src\Debug.h" />
@@ -137,6 +138,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\lib;</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,6 +181,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\lib;</AdditionalLibraryDirectories>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

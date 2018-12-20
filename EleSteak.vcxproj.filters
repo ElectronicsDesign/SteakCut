@@ -49,6 +49,9 @@
     <ClInclude Include="src\resource.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="lib\SpidarMouse.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EleSteak.rc" />

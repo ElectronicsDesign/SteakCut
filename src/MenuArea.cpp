@@ -1,6 +1,8 @@
 #include "DxLib.h"
+#include "SpidarMouse.h"
 #include "api.h"
 #include "GameMain.h"
+#pragma comment (lib, "SpidarMouse.lib")
 
 typedef enum {
 	eScene_Load,
@@ -49,7 +51,8 @@ void Menu() {
 	}
 
 	DrawStringToHandle(550, 450, "[S] Start", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(550, 500, "[X] Exit", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(550, 500, "[R] Device Tool", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(550, 550, "[X] Exit", GetColor(0, 0, 0), FontControl);
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
 	DrawStringToHandle(1210, 780, "Ver 1.6", GetColor(0, 0, 0), ASFont);
@@ -152,6 +155,12 @@ void LoadMem() {
 	DrawBoxAA(650, 481, 660, 494, GetColor(0, 255, 65), TRUE);
 	ScreenFlip();
 
-	ConnectStatus();
+	if (OpenSpidarMouse() == 1) {
+		DeviceStatus = true;
+	}
+	else {
+		MessageBox(NULL, "[WARN : 0001] SpiderMouseとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+	}
+
 	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);
 }
