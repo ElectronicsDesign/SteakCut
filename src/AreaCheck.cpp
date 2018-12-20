@@ -1,8 +1,7 @@
 #include "DxLib.h"
 
-//共通の変数使用
 extern int counter;
-extern int steakX[4];
+extern int steakX[3];
 extern int MouseX, MouseY;
 extern int Handle1;
 extern int AudioCounter;
@@ -53,7 +52,7 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 void AudioCheck() {
 	if (AudioPlay == true) {
 		AudioCounter++;
-		if (AudioCounter % 600 == 0) {
+		if (AudioCounter % 450 == 0) {
 			AudioPlay = false;
 			AudioCounter = 0;
 		}

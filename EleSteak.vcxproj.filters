@@ -1,10 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\AreaCheck.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MenuArea.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameMain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Debug.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -22,5 +34,29 @@
     <ClInclude Include="src\AreaCheck.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="src\MenuArea.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameMain.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\api.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\SpidarMouse.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EleSteak.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="appicon.ico" />
   </ItemGroup>
 </Project>
