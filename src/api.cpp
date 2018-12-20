@@ -1,6 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "SpidarMouse.h"
-#pragma comment (lib, "SpidarMouse.lib")
 
 typedef enum {
 	eScene_Load,
@@ -47,6 +45,7 @@ bool AntiMem() {
 	}
 
 	if (Cheat == true) {
+
 		return true;
 	}
 	return false;

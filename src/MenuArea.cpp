@@ -32,6 +32,15 @@ void UpdateScene() {
 	if (CheckHitKey(KEY_INPUT_X) != 0) {
 		Scene = eScene_Exit;
 	}
+	if (CheckHitKey(KEY_INPUT_R) != 0) {
+		if (OpenSpidarMouse() == 1) {
+			MessageBox(NULL, "USBデバイスの接続に成功しました。", "EteakCut Device Controller", MB_OK);
+			DeviceStatus = true;
+		}
+		else {
+			MessageBox(NULL, "[WARN : 0001] USBデバイスとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+		}
+	}
 }
 
 void Menu() {
@@ -50,12 +59,12 @@ void Menu() {
 		DrawStringToHandle(165, 4, "未接続 (OFFLINE)", GetColor(248, 6, 6), ASBFont);
 	}
 
-	DrawStringToHandle(550, 450, "[S] Start", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(550, 500, "[R] Device Tool", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(550, 550, "[X] Exit", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(480, 450, "[S] スタート", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(480, 500, "[R] デバイス再接続", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(480, 550, "[X] 終了", GetColor(0, 0, 0), FontControl);
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.6", GetColor(0, 0, 0), ASFont);
+	DrawStringToHandle(1210, 780, "Ver 1.7-Beta", GetColor(0, 0, 0), ASFont);
 
 }
 void Standby() {
@@ -86,6 +95,7 @@ void StartApp() {
 }
 
 void ExitApp() {
+	CloseSpidarMouse();
 	DxLib_End();
 	exit(0);
 }
@@ -159,7 +169,7 @@ void LoadMem() {
 		DeviceStatus = true;
 	}
 	else {
-		MessageBox(NULL, "[WARN : 0001] SpiderMouseとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+		MessageBox(NULL, "[WARN : 0001] USBデバイスとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
 	}
 
 	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);
