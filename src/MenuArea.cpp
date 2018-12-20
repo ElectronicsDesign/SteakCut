@@ -38,7 +38,7 @@ void UpdateScene() {
 			DeviceStatus = true;
 		}
 		else {
-			MessageBox(NULL, "[WARN : 0001] USBデバイスとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+			MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。\n正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
 		}
 	}
 }
@@ -64,7 +64,7 @@ void Menu() {
 	DrawStringToHandle(480, 550, "[X] 終了", GetColor(0, 0, 0), FontControl);
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.7-Beta", GetColor(0, 0, 0), ASFont);
+	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
 
 }
 void Standby() {
@@ -123,14 +123,14 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		MessageBox(NULL, "[ERROR : 0001] 画像の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		MessageBox(NULL, "[ERROR : 0002] 音源の展開に失敗しました。正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
 		ExitApp();
 	}
 }
@@ -169,7 +169,7 @@ void LoadMem() {
 		DeviceStatus = true;
 	}
 	else {
-		MessageBox(NULL, "[WARN : 0001] USBデバイスとの接続に失敗しました。正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はメニュー画面で行えます。)", "EteakCut Device Controller", MB_OK);
 	}
 
 	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);

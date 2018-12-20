@@ -1,11 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
 #include "SpidarMouse.h"
+#pragma comment (lib, "SpidarMouse.lib")
 #include "api.h"
 #include "MenuArea.h"
 #include "AreaCheck.h"
 #include "Debug.h"
 #include <stdio.h>
+
 
 typedef enum {
 	eScene_Load,
@@ -71,7 +73,7 @@ void AppStart() {
 		GetMousePoint(&MouseX, &MouseY);
 
 		if (AntiMem() == true) {
-			MessageBox(NULL, "[ERROR:0003]不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
+			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
 			CloseSpidarMouse();
 
 			exit(2);
