@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
+#include "SpidarMouse.h"
 #include "api.h"
 #include "MenuArea.h"
 #include "AreaCheck.h"
@@ -25,7 +26,6 @@ extern int image, imgBack, Handle, Handle1;
 extern int MouseX, MouseY;
 extern int imgmiddle[4];
 static int SoundCounter = 0;
-char Key[256];
 
 extern int Scene;
 extern int ASFont;
@@ -58,9 +58,9 @@ void AppStart() {
 	while (!ProcessMessage() && !ClearDrawScreen()) {
 		//↑メッセージ処理 ↑画面をクリア
 
-		if (Key[KEY_INPUT_R]) { ResetArea(); }
+		if (CheckHitKey(KEY_INPUT_R) != 0) { ResetArea(); }
 
-		if (Key[KEY_INPUT_M]) { 
+		if (CheckHitKey(KEY_INPUT_M) != 0) {
 			StopSoundMem(Handle);
 			StopSoundMem(Handle1);
 			ResetArea();
@@ -72,6 +72,8 @@ void AppStart() {
 
 		if (AntiMem() == true) {
 			MessageBox(NULL, "[ERROR:0003]不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
+			CloseSpidarMouse();
+
 			exit(2);
 		}
 
