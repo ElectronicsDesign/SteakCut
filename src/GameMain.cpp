@@ -99,6 +99,7 @@ void AppStart() {
 
 		//デバッグ用
 		OutXYData();
+		PicArea();
 		FPSPrint();
 
 		ScreenFlip();//裏画面を表画面に反映

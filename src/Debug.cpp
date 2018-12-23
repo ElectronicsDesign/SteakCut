@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "DxLib.h"
 
+static int DMouseX, DMouseY;
 extern int ASFont;
-extern int MouseX, MouseY;
 extern int steakX[4];
 
 float FPS = 0.0;
@@ -12,18 +12,22 @@ char buf[256];
 
 
 void OutXYData() {
-	GetMousePoint(&MouseX, &MouseY);
+	GetMousePoint(&DMouseX, &DMouseY);
 	DrawStringToHandle(1100, 20, "DEBUG", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1210, 20, "X", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1210, 40, "Y", GetColor(255, 255, 255), ASFont);
+
+	sprintf(buf, "%d", DMouseX);
+	DrawStringToHandle(1230, 20, buf, GetColor(255, 255, 255), ASFont);
+	sprintf(buf, "%d", DMouseY);
+	DrawStringToHandle(1230, 40, buf, GetColor(255, 255, 255), ASFont);
+
+}
+
+void PicArea() {
 	DrawStringToHandle(1170, 80, "Steak0", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1170, 100, "Steak1", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1170, 120, "Steak2", GetColor(255, 255, 255), ASFont);
-
-	sprintf(buf, "%d", MouseX);
-	DrawStringToHandle(1230, 20, buf, GetColor(255, 255, 255), ASFont);
-	sprintf(buf, "%d", MouseY);
-	DrawStringToHandle(1230, 40, buf, GetColor(255, 255, 255), ASFont);
 
 	sprintf(buf, "%d", steakX[0]);
 	DrawStringToHandle(1230, 80, buf, GetColor(255, 255, 255), ASFont);
