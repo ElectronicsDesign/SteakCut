@@ -100,7 +100,7 @@ void Menu() {
 		else {
 			pointer--;
 		}
-		Sleep(1 * 80);
+		Sleep(1 * 100);
 	}
 
 	if ((CheckHitKey(KEY_INPUT_DOWN) != 0)) {
@@ -110,7 +110,7 @@ void Menu() {
 		else {
 			pointer++;
 		}
-		Sleep(1 * 80);
+		Sleep(1 * 100);
 	}
 
 }
@@ -199,7 +199,7 @@ void DeviceTool() {
 				}
 			}
 		}
-		Sleep(1 * 80);
+		Sleep(1 * 100);
 	}
 
 	if ((CheckHitKey(KEY_INPUT_DOWN) != 0)) {
@@ -216,7 +216,7 @@ void DeviceTool() {
 				}
 			}
 		}
-		Sleep(1 * 80);
+		Sleep(1 * 100);
 	}
 
 }
