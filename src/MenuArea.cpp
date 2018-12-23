@@ -34,8 +34,8 @@ void OutTitle() {
 	DrawStringToHandle(3, 4, "USBデバイス : ", GetColor(0, 0, 0), ASBFont);
 
 	if (DeviceStatus == true) {
-		DrawCircleAA(150, 13, 9, 180, GetColor(0, 255, 65), 1);
-		DrawStringToHandle(165, 4, "接続済み (ONLINE)", GetColor(0, 255, 65), ASBFont);
+		DrawCircleAA(150, 13, 9, 180, GetColor(28, 5, 255), 1);
+		DrawStringToHandle(165, 4, "接続済み (ONLINE)", GetColor(28, 5, 255), ASBFont);
 
 	}
 	else {
