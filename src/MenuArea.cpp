@@ -39,12 +39,7 @@ void UpdateScene() {
 	}
 }
 
-void DevUpdateScene() {
-
-}
-
-
-void Menu() {
+void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
 
@@ -71,12 +66,16 @@ void Menu() {
 
 	}
 
+	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
+	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
+}
+
+void Menu() {
+	OutTitle();
+
 	DrawStringToHandle(480, 450, "スタート", GetColor(0, 0, 0), FontControl);
 	DrawStringToHandle(480, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
 	DrawStringToHandle(480, 550, "終了", GetColor(0, 0, 0), FontControl);
-
-	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
@@ -116,20 +115,7 @@ void Menu() {
 }
 
 void DeviceTool() {
-	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
-	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
-
-	DrawStringToHandle(3, 4, "USBデバイス : ", GetColor(0, 0, 0), ASBFont);
-
-	if (DeviceStatus == true) {
-		DrawCircleAA(150, 13, 9, 180, GetColor(0, 255, 65), 1);
-		DrawStringToHandle(165, 4, "接続済み (ONLINE)", GetColor(0, 255, 65), ASBFont);
-
-	}
-	else {
-		DrawCircleAA(150, 13, 9, 180, GetColor(248, 6, 6), 1);
-		DrawStringToHandle(165, 4, "未接続 (OFFLINE)", GetColor(248, 6, 6), ASBFont);
-	}
+	OutTitle();
 
 	if (pointer == 0) {
 		DrawStringToHandle(430, 450, "→", GetColor(0, 0, 0), FontControl);
@@ -153,8 +139,6 @@ void DeviceTool() {
 
 	DrawStringToHandle(480, 550, "メニュー画面へ", GetColor(0, 0, 0), FontControl);
 
-	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
