@@ -12,6 +12,7 @@ char buf[256];
 
 
 void OutXYData() {
+	GetMousePoint(&MouseX, &MouseY);
 	DrawStringToHandle(1100, 20, "DEBUG", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1210, 20, "X", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1210, 40, "Y", GetColor(255, 255, 255), ASFont);
