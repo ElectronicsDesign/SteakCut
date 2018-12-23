@@ -27,18 +27,6 @@ static int Background;
 static int logo;
 static bool loadStatus = false;
 
-void UpdateScene() {
-	if (CheckHitKey(KEY_INPUT_R) != 0) {
-		if (OpenSpidarMouse() == 1) {
-			MessageBox(NULL, "USBデバイスの接続に成功しました。", "EteakCut Device Controller", MB_OK);
-			DeviceStatus = true;
-		}
-		else {
-			MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。\n正しくデバイスが接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
-		}
-	}
-}
-
 void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
@@ -246,12 +234,6 @@ void MenuOn() {
 			case eScene_DeviceTool:
 				DeviceTool();
 				break;
-		}
-		if (Scene != eScene_DeviceTool) {
-
-		}
-		else {
-			UpdateScene();
 		}
 	}
 }
