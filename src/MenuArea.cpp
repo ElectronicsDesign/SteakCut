@@ -117,17 +117,6 @@ void Menu() {
 void DeviceTool() {
 	OutTitle();
 
-	if (pointer == 0) {
-		DrawStringToHandle(430, 450, "→", GetColor(0, 0, 0), FontControl);
-	}
-	else if (pointer == 1) {
-		DrawStringToHandle(430, 500, "→", GetColor(0, 0, 0), FontControl);
-	}
-	else if (pointer == 2) {
-		DrawStringToHandle(430, 550, "→", GetColor(0, 0, 0), FontControl);
-
-	}
-
 	if (DeviceStatus == true) {
 		DrawStringToHandle(480, 450, "USBデバイスを接続解除", GetColor(0, 0, 0), FontControl);
 		DrawStringToHandle(480, 500, "モーターの動作確認", GetColor(0, 0, 0), FontControl);
