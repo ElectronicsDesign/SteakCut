@@ -78,7 +78,7 @@ void AppStart() {
 		GetMousePoint(&MouseX, &MouseY);
 
 		if (AntiMem() == true) {
-			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
+			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK | MB_ICONSTOP);
 			CloseSpidarMouse();
 
 			exit(2);

@@ -126,16 +126,16 @@ void DeviceTool() {
 		if (pointer == 0) {
 			if (DeviceStatus == true) {
 				CloseSpidarMouse();
-				MessageBox(NULL, "USBデバイスとの接続を解除しました。", "EteakCut Device Controller", MB_OK);
+				MessageBox(NULL, "USBデバイスとの接続を解除しました。", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 				DeviceStatus = false;
 			}
 			else {
 				if (OpenSpidarMouse() == 1) {
-					MessageBox(NULL, "USBデバイスに接続完了しました。", "EteakCut Device Controller", MB_OK);
+					MessageBox(NULL, "USBデバイスに接続完了しました。", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 					DeviceStatus = true;
 				}
 				else {
-					MessageBox(NULL, "[WARN : 0002]\n\nUSBデバイスとの接続に失敗しました。\nUSBデバイスが正しく接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+					MessageBox(NULL, "[WARN : 0002]\n\nUSBデバイスとの接続に失敗しました。\nUSBデバイスが正しく接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
 				}
 			}
 			Sleep(1 * 100);
@@ -245,14 +245,14 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONWARNING);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONWARNING);
 		ExitApp();
 	}
 }
@@ -291,7 +291,7 @@ void LoadMem() {
 		DeviceStatus = true;
 	}
 	else {
-		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はデバイス管理で行えます。)", "EteakCut Device Controller", MB_OK);
+		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はデバイス管理で行えます。)", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
 		Sleep(1 * 100);
 	}
 
