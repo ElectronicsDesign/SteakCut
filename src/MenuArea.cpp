@@ -75,8 +75,13 @@ void Menu() {
 			Scene = eScene_DeviceTool;
 		}
 		else if (pointer == 2) {
-			Scene = eScene_Exit;
-
+			if ((MessageBox(NULL, TEXT("アプリケーションを終了しますか?"),
+				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
+				Scene = eScene_Exit;
+			}
+			else {
+				Sleep(1 * 200);
+			}
 		}
 	}
 
