@@ -44,13 +44,13 @@ void OutTitle() {
 	}
 
 	if (pointer == 0) {
-		DrawStringToHandle(450, 450, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 450, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 1) {
-		DrawStringToHandle(450, 500, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 500, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 2) {
-		DrawStringToHandle(450, 550, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 550, "→", GetColor(0, 0, 0), FontControl);
 
 	}
 
@@ -61,9 +61,9 @@ void OutTitle() {
 void Menu() {
 	OutTitle();
 
-	DrawStringToHandle(500, 450, "スタート", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(500, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(500, 550, "終了", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 450, "スタート", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "終了", GetColor(0, 0, 0), FontControl);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
@@ -106,15 +106,15 @@ void DeviceTool() {
 	OutTitle();
 
 	if (DeviceStatus == true) {
-		DrawStringToHandle(480, 450, "USBデバイスを接続解除", GetColor(0, 0, 0), FontControl);
-		DrawStringToHandle(480, 500, "モーターの動作確認", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBデバイスを接続解除", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 500, "モーターの動作確認", GetColor(0, 0, 0), FontControl);
 	}
 	else {
-		DrawStringToHandle(480, 450, "USBデバイスと接続", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBデバイスと接続", GetColor(0, 0, 0), FontControl);
 
 	}
 
-	DrawStringToHandle(480, 550, "メニュー画面へ", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "メニュー画面へ", GetColor(0, 0, 0), FontControl);
 
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
