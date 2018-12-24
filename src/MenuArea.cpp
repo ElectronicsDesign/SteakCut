@@ -44,33 +44,33 @@ void OutTitle() {
 	}
 
 	if (pointer == 0) {
-		DrawStringToHandle(430, 450, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(450, 450, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 1) {
-		DrawStringToHandle(430, 500, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(450, 500, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 2) {
-		DrawStringToHandle(430, 550, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(450, 550, "→", GetColor(0, 0, 0), FontControl);
 
 	}
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
+	DrawStringToHandle(1210, 780, "Ver 1.8", GetColor(0, 0, 0), ASFont);
 }
 
 void Menu() {
 	OutTitle();
 
-	DrawStringToHandle(480, 450, "スタート", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(480, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(480, 550, "終了", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(500, 450, "スタート", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(500, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(500, 550, "終了", GetColor(0, 0, 0), FontControl);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
 			Scene = eScene_Standby;
 		}
 		else if (pointer == 1) {
-			Sleep(1 * 100);
+			Sleep(1 * 300);
 			pointer = 0;
 			Scene = eScene_DeviceTool;
 		}
@@ -141,7 +141,7 @@ void DeviceTool() {
 		else if (pointer == 2) {
 			pointer = 0;
 			Scene = eScene_Menu;
-			Sleep(1 * 100);
+			Sleep(1 * 300);
 
 		}
 	}

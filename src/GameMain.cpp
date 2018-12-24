@@ -63,11 +63,16 @@ void AppStart() {
 		if (CheckHitKey(KEY_INPUT_R) != 0) { ResetArea(); }
 
 		if (CheckHitKey(KEY_INPUT_M) != 0) {
-			StopSoundMem(Handle);
-			StopSoundMem(Handle1);
-			ResetArea();
-			Scene = eScene_Menu;
-			break;
+
+			if ((MessageBox(NULL, TEXT("ƒ^ƒCƒgƒ‹‰æ–Ê‚É–ß‚è‚Ü‚·‚©?"),
+				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
+				StopSoundMem(Handle);
+				StopSoundMem(Handle1);
+				ResetArea();
+				Scene = eScene_Menu;
+				break;
+			}
+
 		}
 
 		GetMousePoint(&MouseX, &MouseY);
