@@ -57,7 +57,9 @@ void StartSteak() {
 	static int BaseX = -300;
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
-		if (BaseX >= 650) {
+		if (BaseX >= 650 || (CheckHitKey(KEY_INPUT_S) != 0)) {
+			meatX = -298;
+			BaseX = -300;
 			break;
 		}
 		if (meatX <= 648) {
@@ -69,7 +71,6 @@ void StartSteak() {
 		DrawRotaGraph(BaseX, 450, 1.0, 0.0, Base, TRUE);
 		DrawRotaGraph(meatX, 380, 0.9, 0.0, meatAll, TRUE);
 		DrawStringToHandle(1120, 0, "Sキーで演出スキップ", GetColor(255, 255, 255), ASFont);
-		if (CheckHitKey(KEY_INPUT_S) != 0) { break; }
 	}
 }
 
