@@ -1,7 +1,6 @@
 #include "DxLib.h"
 #include "Debug.h"
 #include "SpidarMouse.h"
-#include "api.h"
 #include "GameMain.h"
 #pragma comment (lib, "SpidarMouse.lib")
 
@@ -104,7 +103,6 @@ void Menu() {
 		}
 		Sleep(1 * 100);
 	}
-
 }
 
 void DeviceTool() {
@@ -184,7 +182,6 @@ void DeviceTool() {
 		}
 		Sleep(1 * 100);
 	}
-
 }
 
 void Standby() {
@@ -245,14 +242,14 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONWARNING);
+		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONWARNING);
+		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }

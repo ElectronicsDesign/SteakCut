@@ -70,6 +70,7 @@ void AppStart() {
 				StopSoundMem(Handle1);
 				ResetArea();
 				Scene = eScene_Menu;
+				Sleep(1 * 200);
 				break;
 			}
 

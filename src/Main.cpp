@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <Windows.h>
 #include "DxLib.h"
 #include "MenuArea.h"
 
