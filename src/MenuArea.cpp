@@ -16,7 +16,7 @@ typedef enum {
 int Scene;
 int ASFont;
 int ASBFont;
-int image, imgBack, Handle, Handle1;
+int table, image, imgBack, Handle, Handle1;
 int imgmiddle[4];
 int MouseX, MouseY;
 int pointer = 0;
@@ -181,11 +181,16 @@ void DeviceTool() {
 		}
 		Sleep(1 * 100);
 	}
+
+	if (pointer == 1 && DeviceStatus == false) {
+		pointer = 0;
+	}
 }
 
 void Standby() {
 	int counter = 0;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
+		DrawRotaGraph(360, 300, 1.0, 0.0, table, TRUE);
 		DrawLineAA(650, 0, 650, 800, GetColor(0, 255, 65));
 		DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
 		DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
@@ -242,7 +247,7 @@ void MenuOn() {
 }
 
 void LoadCheckImg() {
-	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
+	if (table == -1 || image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
 		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
@@ -266,6 +271,7 @@ void LoadMem() {
 	DrawBoxAA(570, 481, 590, 494, GetColor(0, 255, 65), TRUE);
 	ScreenFlip();
 
+	table = LoadGraph("./img/backTable.jpg");
 	image = LoadGraph("./img/Knife_a.png");
 	imgBack = LoadGraph("./img/Main.png");
 	LoadDivGraph("./img/meet_main.png", 3, 3, 1, 268, 412, imgmiddle);
