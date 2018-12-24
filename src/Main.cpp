@@ -2,6 +2,8 @@
 #include "DxLib.h"
 #include "MenuArea.h"
 
+bool DebugMode = false;
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	SetGraphMode(1280, 800, 32);
 	SetWindowSize(1280, 800);
@@ -16,6 +18,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 	DrawString(450, 480, "‹N“®’† :", GetColor(255, 255, 255));
 	DrawBoxAA(550, 480, 720, 495, GetColor(255, 255, 255), FALSE);
+	LoadGraphScreen(460, 620, "./img/shift.png", TRUE);
+	DrawString(550, 632, "Press Shift to Debug Mode", GetColor(255, 255, 255));
 
 	LoadMem();
 	MenuOn();

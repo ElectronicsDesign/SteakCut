@@ -21,15 +21,14 @@ int imgmiddle[4];
 int MouseX, MouseY;
 int pointer = 0;
 bool DeviceStatus = false;
+extern bool DebugMode;
 static int FontControl;
 static int Background;
 static int logo;
-static bool loadStatus = false;
 
 void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
-
 	DrawStringToHandle(3, 4, "USBデバイス : ", GetColor(0, 0, 0), ASBFont);
 
 	if (DeviceStatus == true) {
@@ -50,7 +49,6 @@ void OutTitle() {
 	}
 	else if (pointer == 2) {
 		DrawStringToHandle(470, 550, "→", GetColor(0, 0, 0), FontControl);
-
 	}
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
@@ -139,7 +137,8 @@ void DeviceTool() {
 			Sleep(1 * 100);
 		}
 		else if (pointer == 1) {
-
+			MessageBox(NULL, "モーターのテスト機能はまだ開発中～", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
+			Sleep(1 * 100);
 		}
 		else if (pointer == 2) {
 			pointer = 0;
@@ -186,13 +185,18 @@ void DeviceTool() {
 
 void Standby() {
 	int counter = 0;
-	DrawLineAA(650, 0, 650, 800, GetColor(0, 255, 65));
-	DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
-	DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
+	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
+		DrawLineAA(650, 0, 650, 800, GetColor(0, 255, 65));
+		DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
+		DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
 
-	DrawStringToHandle(0, 0, "初期位置の設定を行います。", GetColor(255, 255, 0), ASFont);
-	DrawStringToHandle(0, 18, "丸の部分にマウスを置いてクリックして下さい。Mキーを押すとメニューに戻れます。", GetColor(255, 255, 0), ASFont);
-	while (ProcessMessage() == 0) {
+		DrawStringToHandle(0, 0, "初期位置の設定を行います。", GetColor(255, 255, 0), ASFont);
+		DrawStringToHandle(0, 18, "丸の部分にマウスを置いてクリックして下さい。Mキーを押すとメニューに戻れます。", GetColor(255, 255, 0), ASFont);
+
+		if (DebugMode == true) {
+			OutXYData();
+		}
+
 		if (CheckHitKey(KEY_INPUT_M) == 1) {
 			Scene = eScene_Menu;
 			break;
@@ -207,10 +211,6 @@ void Standby() {
 
 }
 
-void StartApp() {
-	AppStart();
-}
-
 void ExitApp() {
 	CloseSpidarMouse();
 	DxLib_End();
@@ -220,6 +220,7 @@ void ExitApp() {
 void MenuOn() {
 	Scene = eScene_Menu;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
+		if (DebugMode == true) { FlagControl(); }
 		switch (Scene) {
 			case eScene_Standby:
 				Standby();
@@ -228,7 +229,7 @@ void MenuOn() {
 				Menu();
 				break;
 			case eScene_Start:
-				StartApp();
+				AppStart();
 				break;
 			case eScene_Exit:
 				ExitApp();
@@ -289,7 +290,12 @@ void LoadMem() {
 	}
 	else {
 		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はデバイス管理で行えます。)", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
-		Sleep(1 * 100);
+	}
+	Sleep(1 * 100);
+
+	if ((CheckHitKey(KEY_INPUT_LSHIFT) == 1) || (CheckHitKey(KEY_INPUT_RSHIFT) == 1)) {
+		MessageBox(NULL, "Shiftキーが押されたためデバッグモードで起動します。", "EteakCut DevTool", MB_OK | MB_ICONINFORMATION);
+		DebugMode = true;
 	}
 
 	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);

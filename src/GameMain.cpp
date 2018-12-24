@@ -27,6 +27,7 @@ bool AudioPlay = false;
 extern int image, imgBack, Handle, Handle1;
 extern int MouseX, MouseY;
 extern int imgmiddle[4];
+extern bool DebugMode;
 static int SoundCounter = 0;
 
 extern int Scene;
@@ -104,9 +105,12 @@ void AppStart() {
 		}
 
 		//デバッグ用
-		OutXYData();
-		PicArea();
-		FPSPrint();
+		if (DebugMode == true) {
+			OutXYData();
+			PicArea();
+			FPSPrint();
+			FlagControl();
+		}
 
 		ScreenFlip();//裏画面を表画面に反映
 
