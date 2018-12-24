@@ -2,7 +2,7 @@
 // 
 // 		‚c‚wƒ‰ƒCƒuƒ‰ƒŠ		Windowsê—pŠÖ”ƒvƒƒgƒ^ƒCƒvéŒ¾—pƒwƒbƒ_ƒtƒ@ƒCƒ‹
 // 
-// 				Ver 3.19d
+// 				Ver 3.19f
 // 
 // -------------------------------------------------------------------------------
 
@@ -230,6 +230,26 @@ extern	int			GetWinSockLastError( void ) ;				// WinSock ‚ÅÅŒã‚É”­¶‚µ‚½ƒGƒ‰[‚
 
 
 
+// DxInputString.cppŠÖ”ƒvƒƒgƒ^ƒCƒvéŒ¾
+
+#ifndef DX_NON_KEYEX
+
+extern	int			SetUseTSFFlag( int UseFlag ) ;											// ‚h‚l‚d‚ÌŠ¿š•ÏŠ·Œó•â•\¦‚Ìˆ—‚É TSF ‚ğg—p‚·‚é‚©‚Ç‚¤‚©‚ğİ’è‚·‚é( TRUE:g—p‚·‚é( ƒfƒtƒHƒ‹ƒg )  FALSE:g—p‚µ‚È‚¢ )
+
+#endif // DX_NON_KEYEX
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // DxInput.cppŠÖ”ƒvƒƒgƒ^ƒCƒvéŒ¾
 
@@ -268,6 +288,7 @@ extern	int			LoadDivGraphToResource(				const TCHAR *ResourceName,              
 extern	int			LoadDivGraphToResourceWithStrLen(	const TCHAR *ResourceName, size_t ResourceNameLength, const TCHAR *ResourceType, size_t ResourceTypeLength, int AllNum, int XNum, int YNum, int   XSize, int   YSize, int *HandleArray ) ;	// ‰æ‘œƒŠƒ\[ƒX‚ğ•ªŠ„‚µ‚ÄƒOƒ‰ƒtƒBƒbƒNƒnƒ“ƒhƒ‹‚ğì¬‚·‚é
 extern	int			LoadDivGraphFToResource(			const TCHAR *ResourceName,                            const TCHAR *ResourceType,                            int AllNum, int XNum, int YNum, float XSize, float YSize, int *HandleArray ) ;	// ‰æ‘œƒŠƒ\[ƒX‚ğ•ªŠ„‚µ‚ÄƒOƒ‰ƒtƒBƒbƒNƒnƒ“ƒhƒ‹‚ğì¬‚·‚é( floatŒ^ )
 extern	int			LoadDivGraphFToResourceWithStrLen(	const TCHAR *ResourceName, size_t ResourceNameLength, const TCHAR *ResourceType, size_t ResourceTypeLength, int AllNum, int XNum, int YNum, float XSize, float YSize, int *HandleArray ) ;	// ‰æ‘œƒŠƒ\[ƒX‚ğ•ªŠ„‚µ‚ÄƒOƒ‰ƒtƒBƒbƒNƒnƒ“ƒhƒ‹‚ğì¬‚·‚é( floatŒ^ )
+extern	int			CreateGraphFromID3D11Texture2D(     const void *pID3D11Texture2D ) ;							// ID3D11Texture2D ‚©‚çƒOƒ‰ƒtƒBƒbƒNƒnƒ“ƒhƒ‹‚ğì¬‚·‚é
 
 // ‰æ‘œî•ñŠÖŒWŠÖ”
 extern	const void*	GetGraphID3D11Texture2D(		int GrHandle ) ;												// ƒOƒ‰ƒtƒBƒbƒNƒnƒ“ƒhƒ‹‚ª‚Â ID3D11Texture2D ‚ğæ“¾‚·‚é( Direct3D11 ‚ğg—p‚µ‚Ä‚¢‚éê‡‚Ì‚İ—LŒø )( –ß‚è’l‚ğ ID3D11Texture2D * ‚ÉƒLƒƒƒXƒg‚µ‚Ä‚­‚¾‚³‚¢ )

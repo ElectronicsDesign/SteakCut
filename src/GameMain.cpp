@@ -27,6 +27,7 @@ bool AudioPlay = false;
 extern int image, imgBack, Handle, Handle1;
 extern int MouseX, MouseY;
 extern int imgmiddle[4];
+extern bool DebugMode;
 static int SoundCounter = 0;
 
 extern int Scene;
@@ -63,17 +64,23 @@ void AppStart() {
 		if (CheckHitKey(KEY_INPUT_R) != 0) { ResetArea(); }
 
 		if (CheckHitKey(KEY_INPUT_M) != 0) {
-			StopSoundMem(Handle);
-			StopSoundMem(Handle1);
-			ResetArea();
-			Scene = eScene_Menu;
-			break;
+
+			if ((MessageBox(NULL, TEXT("タイトル画面に戻りますか?"),
+				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
+				StopSoundMem(Handle);
+				StopSoundMem(Handle1);
+				ResetArea();
+				Scene = eScene_Menu;
+				Sleep(1 * 200);
+				break;
+			}
+
 		}
 
 		GetMousePoint(&MouseX, &MouseY);
 
 		if (AntiMem() == true) {
-			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK);
+			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK | MB_ICONSTOP);
 			CloseSpidarMouse();
 
 			exit(2);
@@ -98,9 +105,12 @@ void AppStart() {
 		}
 
 		//デバッグ用
-		OutXYData();
-		PicArea();
-		FPSPrint();
+		if (DebugMode == true) {
+			OutXYData();
+			PicArea();
+			FPSPrint();
+			FlagControl();
+		}
 
 		ScreenFlip();//裏画面を表画面に反映
 

@@ -1,7 +1,6 @@
 #include "DxLib.h"
 #include "Debug.h"
 #include "SpidarMouse.h"
-#include "api.h"
 #include "GameMain.h"
 #pragma comment (lib, "SpidarMouse.lib")
 
@@ -22,15 +21,14 @@ int imgmiddle[4];
 int MouseX, MouseY;
 int pointer = 0;
 bool DeviceStatus = false;
+extern bool DebugMode;
 static int FontControl;
 static int Background;
 static int logo;
-static bool loadStatus = false;
 
 void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
-
 	DrawStringToHandle(3, 4, "USBデバイス : ", GetColor(0, 0, 0), ASBFont);
 
 	if (DeviceStatus == true) {
@@ -44,39 +42,43 @@ void OutTitle() {
 	}
 
 	if (pointer == 0) {
-		DrawStringToHandle(430, 450, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 450, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 1) {
-		DrawStringToHandle(430, 500, "→", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 500, "→", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 2) {
-		DrawStringToHandle(430, 550, "→", GetColor(0, 0, 0), FontControl);
-
+		DrawStringToHandle(470, 550, "→", GetColor(0, 0, 0), FontControl);
 	}
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
-	DrawStringToHandle(1210, 780, "Ver 1.7", GetColor(0, 0, 0), ASFont);
+	DrawStringToHandle(1210, 780, "Ver 1.8", GetColor(0, 0, 0), ASFont);
 }
 
 void Menu() {
 	OutTitle();
 
-	DrawStringToHandle(480, 450, "スタート", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(480, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(480, 550, "終了", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 450, "スタート", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 500, "デバイス管理", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "終了", GetColor(0, 0, 0), FontControl);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
 			Scene = eScene_Standby;
 		}
 		else if (pointer == 1) {
-			Sleep(1 * 100);
+			Sleep(1 * 300);
 			pointer = 0;
 			Scene = eScene_DeviceTool;
 		}
 		else if (pointer == 2) {
-			Scene = eScene_Exit;
-
+			if ((MessageBox(NULL, TEXT("アプリケーションを終了しますか?"),
+				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
+				Scene = eScene_Exit;
+			}
+			else {
+				Sleep(1 * 200);
+			}
 		}
 	}
 
@@ -99,49 +101,49 @@ void Menu() {
 		}
 		Sleep(1 * 100);
 	}
-
 }
 
 void DeviceTool() {
 	OutTitle();
 
 	if (DeviceStatus == true) {
-		DrawStringToHandle(480, 450, "USBデバイスを接続解除", GetColor(0, 0, 0), FontControl);
-		DrawStringToHandle(480, 500, "モーターの動作確認", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBデバイスを接続解除", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 500, "モーターの動作確認", GetColor(0, 0, 0), FontControl);
 	}
 	else {
-		DrawStringToHandle(480, 450, "USBデバイスと接続", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBデバイスと接続", GetColor(0, 0, 0), FontControl);
 
 	}
 
-	DrawStringToHandle(480, 550, "メニュー画面へ", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "メニュー画面へ", GetColor(0, 0, 0), FontControl);
 
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
 			if (DeviceStatus == true) {
 				CloseSpidarMouse();
-				MessageBox(NULL, "USBデバイスとの接続を解除しました。", "EteakCut Device Controller", MB_OK);
+				MessageBox(NULL, "USBデバイスとの接続を解除しました。", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 				DeviceStatus = false;
 			}
 			else {
 				if (OpenSpidarMouse() == 1) {
-					MessageBox(NULL, "USBデバイスに接続完了しました。", "EteakCut Device Controller", MB_OK);
+					MessageBox(NULL, "USBデバイスに接続完了しました。", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 					DeviceStatus = true;
 				}
 				else {
-					MessageBox(NULL, "[WARN : 0002]\n\nUSBデバイスとの接続に失敗しました。\nUSBデバイスが正しく接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK);
+					MessageBox(NULL, "[WARN : 0002]\n\nUSBデバイスとの接続に失敗しました。\nUSBデバイスが正しく接続されているかご確認下さい。", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
 				}
 			}
 			Sleep(1 * 100);
 		}
 		else if (pointer == 1) {
-
+			MessageBox(NULL, "モーターのテスト機能はまだ開発中～", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
+			Sleep(1 * 100);
 		}
 		else if (pointer == 2) {
 			pointer = 0;
 			Scene = eScene_Menu;
-			Sleep(1 * 100);
+			Sleep(1 * 300);
 
 		}
 	}
@@ -179,18 +181,22 @@ void DeviceTool() {
 		}
 		Sleep(1 * 100);
 	}
-
 }
 
 void Standby() {
 	int counter = 0;
-	DrawLineAA(650, 0, 650, 800, GetColor(0, 255, 65));
-	DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
-	DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
+	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
+		DrawLineAA(650, 0, 650, 800, GetColor(0, 255, 65));
+		DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
+		DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
 
-	DrawStringToHandle(0, 0, "初期位置の設定を行います。", GetColor(255, 255, 0), ASFont);
-	DrawStringToHandle(0, 18, "丸の部分にマウスを置いてクリックして下さい。Mキーを押すとメニューに戻れます。", GetColor(255, 255, 0), ASFont);
-	while (ProcessMessage() == 0) {
+		DrawStringToHandle(0, 0, "初期位置の設定を行います。", GetColor(255, 255, 0), ASFont);
+		DrawStringToHandle(0, 18, "丸の部分にマウスを置いてクリックして下さい。Mキーを押すとメニューに戻れます。", GetColor(255, 255, 0), ASFont);
+
+		if (DebugMode == true) {
+			OutXYData();
+		}
+
 		if (CheckHitKey(KEY_INPUT_M) == 1) {
 			Scene = eScene_Menu;
 			break;
@@ -205,10 +211,6 @@ void Standby() {
 
 }
 
-void StartApp() {
-	AppStart();
-}
-
 void ExitApp() {
 	CloseSpidarMouse();
 	DxLib_End();
@@ -218,6 +220,7 @@ void ExitApp() {
 void MenuOn() {
 	Scene = eScene_Menu;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
+		if (DebugMode == true) { FlagControl(); }
 		switch (Scene) {
 			case eScene_Standby:
 				Standby();
@@ -226,7 +229,7 @@ void MenuOn() {
 				Menu();
 				break;
 			case eScene_Start:
-				StartApp();
+				AppStart();
 				break;
 			case eScene_Exit:
 				ExitApp();
@@ -240,14 +243,14 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK);
+		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }
@@ -286,8 +289,13 @@ void LoadMem() {
 		DeviceStatus = true;
 	}
 	else {
-		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はデバイス管理で行えます。)", "EteakCut Device Controller", MB_OK);
-		Sleep(1 * 100);
+		MessageBox(NULL, "[WARN : 0001]\n\nUSBデバイスとの接続に失敗しました。オフラインモードで起動します。\n(デバイスとの再接続はデバイス管理で行えます。)", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
+	}
+	Sleep(1 * 100);
+
+	if ((CheckHitKey(KEY_INPUT_LSHIFT) == 1) || (CheckHitKey(KEY_INPUT_RSHIFT) == 1)) {
+		MessageBox(NULL, "Shiftキーが押されたためデバッグモードで起動します。", "EteakCut DevTool", MB_OK | MB_ICONINFORMATION);
+		DebugMode = true;
 	}
 
 	DrawBoxAA(660, 481, 719, 494, GetColor(0, 255, 65), TRUE);

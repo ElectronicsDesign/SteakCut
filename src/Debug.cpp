@@ -4,6 +4,7 @@
 static int DMouseX, DMouseY;
 extern int ASFont;
 extern int steakX[4];
+extern bool DeviceStatus;
 
 float FPS = 0.0;
 int  FPSTime[2] = { 0, }, FPSTime_i = 0;
@@ -53,4 +54,17 @@ void FPSPrint() {
 		DrawStringToHandle(1195, 60, "FPS", GetColor(255, 255, 255), ASFont);
 		DrawStringToHandle(1230, 60, Str, GetColor(255, 255, 255), ASFont);
 	return;
+}
+
+void FlagControl() {
+	if (CheckHitKey(KEY_INPUT_D) != 0) { 
+		if (DeviceStatus == true) {
+			DeviceStatus = false;
+			Sleep(1 * 100);
+		}
+		else {
+			DeviceStatus = true;
+			Sleep(1 * 100);
+		}
+	}
 }
