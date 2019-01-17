@@ -201,6 +201,23 @@ void MortorTest() {
 		sprintf_s(idText, "%d", Counter + 1);
 		DrawStringToHandle(690, 500, idText, GetColor(0, 0, 0), FontControl);
 		DrawStringToHandle(460, 500, "モーターID:   動作中...", GetColor(0, 0, 0), FontControl);
+		
+		switch (Counter){
+			default:
+				SetDutyOnCh(1.0, 0.0, 0.0, 0.0, 1000);
+				break;
+			case 1:
+				SetDutyOnCh(0.0, 1.0, 0.0, 0.0, 1000);
+				break;
+			case 2:
+				SetDutyOnCh(0.0, 0.0, 1.0, 0.0, 1000);
+				break;
+			case 3:
+				SetDutyOnCh(0.0, 0.0, 0.0, 1.0, 1000);
+				break;
+				
+		}
+
 		ScreenFlip();
 		Sleep(1 * 1000);
 	}
@@ -248,24 +265,24 @@ void MenuOn() {
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
 		if (DebugMode == true) { FlagControl(); }
 		switch (Scene) {
-			case eScene_Standby:
-				Standby();
-				break;
-			case eScene_Menu:
-				Menu();
-				break;
-			case eScene_Start:
-				AppStart();
-				break;
-			case eScene_Exit:
-				ExitApp();
-				break;
-			case eScene_DeviceTool:
-				DeviceTool();
-				break;
-			case eScene_Test:
-				MortorTest();
-				break;
+		case eScene_Standby:
+			Standby();
+			break;
+		case eScene_Menu:
+			Menu();
+			break;
+		case eScene_Start:
+			AppStart();
+			break;
+		case eScene_Exit:
+			ExitApp();
+			break;
+		case eScene_DeviceTool:
+			DeviceTool();
+			break;
+		case eScene_Test:
+			MortorTest();
+			break;
 		}
 	}
 }
