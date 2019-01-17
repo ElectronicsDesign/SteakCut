@@ -6,6 +6,7 @@ extern int MouseX, MouseY;
 extern int Handle1;
 extern int AudioCounter;
 extern bool AudioPlay;
+extern bool clickStatus;
 
 void CutAudioStart() {
 	if (AudioPlay == false) {
@@ -15,7 +16,7 @@ void CutAudioStart() {
 }
 
 void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
-	if ((MouseX > xMin) && (MouseX < xMax)) {
+	if ((MouseX > xMin) && (MouseX < xMax) && clickStatus == true) {
 		if ((MouseY > yMin) && (MouseY < yMax)) {
 			counter++;
 			if (counter == 30) {
@@ -32,7 +33,7 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 		}
 	}
 
-	if ((MouseY > yMin) && (MouseY < yMax)) {
+	if ((MouseY > yMin) && (MouseY < yMax) && clickStatus == true) {
 		if ((MouseX > xMin) && (MouseX < xMax)) {
 			counter++;
 			if (counter == 30) {
