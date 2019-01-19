@@ -2,7 +2,7 @@
 //
 //		ＤＸライブラリ　コンパイルコンフィグヘッダファイル
 //
-//				Ver 3.19d
+//				Ver 3.19f
 //
 // ----------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@
 //#define DX_NON_MOVIE
 
 // ＴＧＡ画像の読み込み機能がいらない方は次のコメントを外してください
-//#define DX_NON_TGA
+#define DX_NON_TGA
 
 // ＪＰＥＧ画像の読みこみ機能がいらない方は次のコメントを外してください
 // ※DxUseCLib.lib も再コンパイルする必要があります
@@ -79,7 +79,7 @@
 //#define DX_NON_DSHOW_MP3
 
 // DirectShow を使用した動画ファイルのデコードを行わない場合は次のコメントをはずしてください
-//#define DX_NON_DSHOW_MOVIE
+#define DX_NON_DSHOW_MOVIE
 
 // Media Foundation を使用した動画ファイルのデコードを行わない場合は次のコメントをはずしてください
 //#define DX_NON_MEDIA_FOUNDATION
@@ -91,7 +91,7 @@
 //#define DX_NON_INPUTSTRING
 
 // 通信機能がいらない方は次のコメントを外してください
-//#define DX_NON_NETWORK
+#define DX_NON_NETWORK
 
 // マスク機能がいらない方は次のコメントを外してください
 //#define DX_NON_MASK
@@ -116,7 +116,7 @@
 #define DX_USE_DXLIB_MEM_DUMP
 
 // モデルデータを扱う機能を使用しない方は次のコメントを外してください
-//#define DX_NON_MODEL
+#define DX_NON_MODEL
 
 // Bullet Physics をリンクしない場合は次のコメントを外してください
 // ※DxUseCLib.lib も再コンパイルする必要があります
@@ -133,7 +133,7 @@
 //#define DX_NON_STOPTASKSWITCH
 
 // ログ出力を行わない場合は次のコメントを外して下さい
-//#define DX_NON_LOG
+#define DX_NON_LOG
 
 // printfDx を無効にする場合は次のコメントを外して下さい
 //#define DX_NON_PRINTF_DX
@@ -163,10 +163,10 @@
 //#define DX_NON_HANDLE_ERROR_CHECK
 
 // Direct3D11 を使用しない場合は以下のコメントを外してください( 現在開発中なので、必ずコメントを外した状態にしてください )
-//#define DX_NON_DIRECT3D11
+#define DX_NON_DIRECT3D11
 
 // Direct3D9 を使用しない場合は以下のコメントを外してください
-//#define DX_NON_DIRECT3D9
+#define DX_NON_DIRECT3D9
 
 // 軽量バージョンのＤＸライブラリを生成する場合は次のコメントを外してください
 //#define DX_LIB_LITEVER
