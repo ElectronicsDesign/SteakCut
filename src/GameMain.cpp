@@ -21,7 +21,7 @@ typedef enum {
 int counter = 0;
 int steakX[3] = { 406, 648, 890 };
 int steakY[3] = { 380, 380, 380 };
-int SSX[3][2] = { {406,380},{648,380},{890,380} };
+int SSX[3][2] = { { 406,380 },{ 648,380 },{ 890,380 } };
 int AudioCounter = 0;
 bool AudioPlay = false;
 bool clickStatus = false;
@@ -88,7 +88,7 @@ void AppStart() {
 	while (!ProcessMessage() && !ClearDrawScreen()) {
 		//↑メッセージ処理 ↑画面をクリア
 
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0){ clickStatus = true; }
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) { clickStatus = true; }
 
 		if (CheckHitKey(KEY_INPUT_R) != 0) { ResetArea(); }
 
@@ -135,6 +135,7 @@ void AppStart() {
 
 		DrawStringToHandle(1155, 0, "Rキーでリセット", GetColor(255, 255, 255), ASFont);
 		DrawStringToHandle(970, 0, "Mキーでタイトルに戻る", GetColor(255, 255, 255), ASFont);
+		DrawStringToHandle(0, 0, "左クリックしてステーキを切り始めよう!", GetColor(255, 255, 0), ASFont);
 
 		if ((steakX[0] <= 380) || (steakX[2] >= 915)) {
 			DrawStringToHandle(0, 0, "これ以上切ることはできません。Rキーを押してリセットして下さい。", GetColor(255, 255, 0), ASFont);
@@ -154,7 +155,7 @@ void AppStart() {
 
 		ScreenFlip();//裏画面を表画面に反映
 
-		//10秒の音源のため10秒に1回再生
+					 //10秒の音源のため10秒に1回再生
 		if (SoundCounter % 600 == 0) {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
