@@ -31,29 +31,29 @@ static int logo;
 void PointerCtl() {
 
 	if (pointer == 0) {
-		DrawStringToHandle(470, 450, "â†’", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 450, "¨", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 1) {
-		DrawStringToHandle(470, 500, "â†’", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 500, "¨", GetColor(0, 0, 0), FontControl);
 	}
 	else if (pointer == 2) {
-		DrawStringToHandle(470, 550, "â†’", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(470, 550, "¨", GetColor(0, 0, 0), FontControl);
 	}
 }
 
 void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
-	DrawStringToHandle(3, 4, "USBãƒ‡ãƒã‚¤ã‚¹ : ", GetColor(0, 0, 0), ASBFont);
+	DrawStringToHandle(3, 4, "USBƒfƒoƒCƒX : ", GetColor(0, 0, 0), ASBFont);
 
 	if (DeviceStatus == true) {
 		DrawCircleAA(150, 13, 9, 180, GetColor(28, 5, 255), 1);
-		DrawStringToHandle(165, 4, "æ¥ç¶šæ¸ˆã¿ (ONLINE)", GetColor(28, 5, 255), ASBFont);
+		DrawStringToHandle(165, 4, "Ú‘±Ï‚İ (ONLINE)", GetColor(28, 5, 255), ASBFont);
 
 	}
 	else {
 		DrawCircleAA(150, 13, 9, 180, GetColor(248, 6, 6), 1);
-		DrawStringToHandle(165, 4, "æœªæ¥ç¶š (OFFLINE)", GetColor(248, 6, 6), ASBFont);
+		DrawStringToHandle(165, 4, "–¢Ú‘± (OFFLINE)", GetColor(248, 6, 6), ASBFont);
 	}
 
 	DrawStringToHandle(5, 780, "Developed by ElectronicsDesign Group2", GetColor(0, 0, 0), ASFont);
@@ -64,9 +64,9 @@ void Menu() {
 	OutTitle();
 	PointerCtl();
 
-	DrawStringToHandle(520, 450, "ã‚¹ã‚¿ãƒ¼ãƒˆ", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(520, 500, "ãƒ‡ãƒã‚¤ã‚¹ç®¡ç†", GetColor(0, 0, 0), FontControl);
-	DrawStringToHandle(520, 550, "çµ‚äº†", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 450, "ƒXƒ^[ƒg", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 500, "ƒfƒoƒCƒXŠÇ—", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "I—¹", GetColor(0, 0, 0), FontControl);
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
@@ -78,7 +78,7 @@ void Menu() {
 			Scene = eScene_DeviceTool;
 		}
 		else if (pointer == 2) {
-			if ((MessageBox(NULL, TEXT("ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã—ã¾ã™ã‹?"),
+			if ((MessageBox(NULL, TEXT("ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğI—¹‚µ‚Ü‚·‚©?"),
 				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
 				Scene = eScene_Exit;
 			}
@@ -114,34 +114,34 @@ void DeviceTool() {
 	PointerCtl();
 
 	if (DeviceStatus == true) {
-		DrawStringToHandle(520, 450, "USBãƒ‡ãƒã‚¤ã‚¹ã‚’æ¥ç¶šè§£é™¤", GetColor(0, 0, 0), FontControl);
-		DrawStringToHandle(520, 500, "ãƒ¢ãƒ¼ã‚¿ãƒ¼ã®å‹•ä½œç¢ºèª", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBƒfƒoƒCƒX‚ğÚ‘±‰ğœ", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 500, "ƒ‚[ƒ^[‚Ì“®ìŠm”F", GetColor(0, 0, 0), FontControl);
 	}
 	else {
-		DrawStringToHandle(520, 450, "USBãƒ‡ãƒã‚¤ã‚¹ã¨æ¥ç¶š", GetColor(0, 0, 0), FontControl);
+		DrawStringToHandle(520, 450, "USBƒfƒoƒCƒX‚ÆÚ‘±", GetColor(0, 0, 0), FontControl);
 
 	}
 
-	DrawStringToHandle(520, 550, "ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã¸", GetColor(0, 0, 0), FontControl);
+	DrawStringToHandle(520, 550, "ƒƒjƒ…[‰æ–Ê‚Ö", GetColor(0, 0, 0), FontControl);
 
 
 	if (CheckHitKey(KEY_INPUT_RETURN) != 0) {
 		if (pointer == 0) {
 			if (DeviceStatus == true) {
 				CloseSpidarMouse();
-				MessageBox(NULL, "USBãƒ‡ãƒã‚¤ã‚¹ã¨ã®æ¥ç¶šã‚’è§£é™¤ã—ã¾ã—ãŸã€‚", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
+				MessageBox(NULL, "USBƒfƒoƒCƒX‚Æ‚ÌÚ‘±‚ğ‰ğœ‚µ‚Ü‚µ‚½B", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 				DeviceStatus = false;
 			}
 			else {
 				if (OpenSpidarMouse() == 1) {
-					MessageBox(NULL, "USBãƒ‡ãƒã‚¤ã‚¹ã«æ¥ç¶šå®Œäº†ã—ã¾ã—ãŸã€‚", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
+					MessageBox(NULL, "USBƒfƒoƒCƒX‚ÉÚ‘±Š®—¹‚µ‚Ü‚µ‚½B", "EteakCut Device Controller", MB_OK | MB_ICONINFORMATION);
 					DeviceStatus = true;
 				}
 				else {
-					MessageBox(NULL, "[WARN : 0002]\n\nUSBãƒ‡ãƒã‚¤ã‚¹ã¨ã®æ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nUSBãƒ‡ãƒã‚¤ã‚¹ãŒæ­£ã—ãæ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã‹ã”ç¢ºèªä¸‹ã•ã„ã€‚", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
+					MessageBox(NULL, "[WARN : 0002]\n\nUSBƒfƒoƒCƒX‚Æ‚ÌÚ‘±‚É¸”s‚µ‚Ü‚µ‚½B\nUSBƒfƒoƒCƒX‚ª³‚µ‚­Ú‘±‚³‚ê‚Ä‚¢‚é‚©‚²Šm”F‰º‚³‚¢B", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
 				}
 			}
-			Sleep(1 * 100);
+			Sleep(1 * 150);
 		}
 		else if (pointer == 1) {
 			Scene = eScene_Test;
@@ -168,7 +168,7 @@ void DeviceTool() {
 				}
 			}
 		}
-		Sleep(1 * 100);
+		Sleep(1 * 150);
 	}
 
 	if ((CheckHitKey(KEY_INPUT_DOWN) != 0)) {
@@ -185,7 +185,7 @@ void DeviceTool() {
 				}
 			}
 		}
-		Sleep(1 * 100);
+		Sleep(1 * 150);
 	}
 
 	if (pointer == 1 && DeviceStatus == false) {
@@ -200,26 +200,26 @@ void MortorTest() {
 		OutTitle();
 		sprintf_s(idText, "%d", Counter + 1);
 		DrawStringToHandle(690, 500, idText, GetColor(0, 0, 0), FontControl);
-		DrawStringToHandle(460, 500, "ãƒ¢ãƒ¼ã‚¿ãƒ¼ID:   å‹•ä½œä¸­...", GetColor(0, 0, 0), FontControl);
-		
-		switch (Counter){
-			default:
-				SetDutyOnCh(1.0, 0.0, 0.0, 0.0, 1000);
-				break;
-			case 1:
-				SetDutyOnCh(0.0, 1.0, 0.0, 0.0, 1000);
-				break;
-			case 2:
-				SetDutyOnCh(0.0, 0.0, 1.0, 0.0, 1000);
-				break;
-			case 3:
-				SetDutyOnCh(0.0, 0.0, 0.0, 1.0, 1000);
-				break;
-				
+		DrawStringToHandle(460, 500, "ƒ‚[ƒ^[ID:   “®ì’†...", GetColor(0, 0, 0), FontControl);
+
+		switch (Counter) {
+		default:
+			SetDutyOnCh(1.0, 0.0, 0.0, 0.0, 1000);
+			break;
+		case 1:
+			SetDutyOnCh(0.0, 1.0, 0.0, 0.0, 1000);
+			break;
+		case 2:
+			SetDutyOnCh(0.0, 0.0, 1.0, 0.0, 1000);
+			break;
+		case 3:
+			SetDutyOnCh(0.0, 0.0, 0.0, 1.0, 1000);
+			break;
+
 		}
 
 		ScreenFlip();
-		Sleep(1 * 1000);
+		Sleep(2 * 1000);
 	}
 
 	Scene = eScene_DeviceTool;
@@ -233,8 +233,8 @@ void Standby() {
 		DrawLineAA(0, 350, 1280, 350, GetColor(0, 255, 65));
 		DrawCircleAA(650, 350, 5, 180, GetColor(0, 255, 65), 1);
 
-		DrawStringToHandle(0, 0, "åˆæœŸä½ç½®ã®è¨­å®šã‚’è¡Œã„ã¾ã™ã€‚", GetColor(255, 255, 0), ASFont);
-		DrawStringToHandle(0, 18, "ä¸¸ã®éƒ¨åˆ†ã«ãƒã‚¦ã‚¹ã‚’ç½®ã„ã¦ã‚¯ãƒªãƒƒã‚¯ã—ã¦ä¸‹ã•ã„ã€‚Mã‚­ãƒ¼ã‚’æŠ¼ã™ã¨ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚Œã¾ã™ã€‚", GetColor(255, 255, 0), ASFont);
+		DrawStringToHandle(0, 0, "‰ŠúˆÊ’u‚Ìİ’è‚ğs‚¢‚Ü‚·B", GetColor(255, 255, 0), ASFont);
+		DrawStringToHandle(0, 18, "ŠÛ‚Ì•”•ª‚Éƒ}ƒEƒX‚ğ’u‚¢‚ÄƒNƒŠƒbƒN‚µ‚Ä‰º‚³‚¢BMƒL[‚ğ‰Ÿ‚·‚Æƒƒjƒ…[‚É–ß‚ê‚Ü‚·B", GetColor(255, 255, 0), ASFont);
 
 		if (DebugMode == true) {
 			OutXYData();
@@ -289,14 +289,14 @@ void MenuOn() {
 
 void LoadCheckImg() {
 	if (table == -1 || image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
-		MessageBox(NULL, "[ERROR : 0001]\n\nç”»åƒã®å±•é–‹ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\næ­£ã—ããƒ•ã‚¡ã‚¤ãƒ«ãŒé…ç½®ã•ã‚Œã¦ã„ã‚‹ã‹ã”ç¢ºèªä¸‹ã•ã„ã€‚", "EteakCut Load Error", MB_OK | MB_ICONERROR);
+		MessageBox(NULL, "[ERROR : 0001]\n\n‰æ‘œ‚Ì“WŠJ‚É¸”s‚µ‚Ü‚µ‚½B\n³‚µ‚­ƒtƒ@ƒCƒ‹‚ª”z’u‚³‚ê‚Ä‚¢‚é‚©‚²Šm”F‰º‚³‚¢B", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }
 
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
-		MessageBox(NULL, "[ERROR : 0002]\n\néŸ³æºã®å±•é–‹ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\næ­£ã—ããƒ•ã‚¡ã‚¤ãƒ«ãŒé…ç½®ã•ã‚Œã¦ã„ã‚‹ã‹ã”ç¢ºèªä¸‹ã•ã„ã€‚", "EteakCut Load Error", MB_OK | MB_ICONERROR);
+		MessageBox(NULL, "[ERROR : 0002]\n\n‰¹Œ¹‚Ì“WŠJ‚É¸”s‚µ‚Ü‚µ‚½B\n³‚µ‚­ƒtƒ@ƒCƒ‹‚ª”z’u‚³‚ê‚Ä‚¢‚é‚©‚²Šm”F‰º‚³‚¢B", "EteakCut Load Error", MB_OK | MB_ICONERROR);
 		ExitApp();
 	}
 }
@@ -336,12 +336,12 @@ void LoadMem() {
 		DeviceStatus = true;
 	}
 	else {
-		MessageBox(NULL, "[WARN : 0001]\n\nUSBãƒ‡ãƒã‚¤ã‚¹ã¨ã®æ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚ªãƒ•ãƒ©ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ã—ã¾ã™ã€‚\n(ãƒ‡ãƒã‚¤ã‚¹ã¨ã®å†æ¥ç¶šã¯ãƒ‡ãƒã‚¤ã‚¹ç®¡ç†ã§è¡Œãˆã¾ã™ã€‚)", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
+		MessageBox(NULL, "[WARN : 0001]\n\nUSBƒfƒoƒCƒX‚Æ‚ÌÚ‘±‚É¸”s‚µ‚Ü‚µ‚½BƒIƒtƒ‰ƒCƒ“ƒ‚[ƒh‚Å‹N“®‚µ‚Ü‚·B\n(ƒfƒoƒCƒX‚Æ‚ÌÄÚ‘±‚ÍƒfƒoƒCƒXŠÇ—‚Ås‚¦‚Ü‚·B)", "EteakCut Device Controller", MB_OK | MB_ICONWARNING);
 	}
 	Sleep(1 * 100);
 
 	if ((CheckHitKey(KEY_INPUT_LSHIFT) == 1) || (CheckHitKey(KEY_INPUT_RSHIFT) == 1)) {
-		MessageBox(NULL, "Shiftã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸãŸã‚ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ã—ã¾ã™ã€‚", "EteakCut DevTool", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, "ShiftƒL[‚ª‰Ÿ‚³‚ê‚½‚½‚ßƒfƒoƒbƒOƒ‚[ƒh‚Å‹N“®‚µ‚Ü‚·B", "EteakCut DevTool", MB_OK | MB_ICONINFORMATION);
 		DebugMode = true;
 	}
 	Sleep(1 * 100);

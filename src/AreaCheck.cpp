@@ -1,4 +1,12 @@
 #include "DxLib.h"
+#include "SpidarMouse.h"
+
+int sleepTimer = 30;
+int mortorTimer = 100;
+float PlusXPower = 5.0;
+float MinusXPower = -5.0;
+float PlusYPower = 0.0;
+float MinusYPower = 0.0;
 
 extern int counter;
 extern int steakX[3];
@@ -21,10 +29,10 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 			counter++;
 			if (counter == 30) {
 				if (goLeft == true) {
-				steakX[group]--;
+					steakX[group]--;
 				}
 				else {
-				steakX[group]++;
+					steakX[group]++;
 				}
 				
 				counter = 0;
