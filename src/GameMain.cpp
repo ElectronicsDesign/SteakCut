@@ -17,7 +17,7 @@ typedef enum {
 	eScene_Standby,
 } eScene;
 
-//ƒOƒ[ƒoƒ‹•Ï”‚Ì’è‹`
+//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®å®šç¾©
 int counter = 0;
 int steakX[3] = { 406, 648, 890 };
 int steakY[3] = { 380, 380, 380 };
@@ -72,7 +72,7 @@ void StartSteak() {
 		DrawRotaGraph(360, 300, 1.0, 0.0, table, TRUE);
 		DrawRotaGraph(BaseX, 450, 1.0, 0.0, Base, TRUE);
 		DrawRotaGraph(meatX, 380, 0.9, 0.0, meatAll, TRUE);
-		DrawStringToHandle(1120, 0, "SƒL[‚Å‰‰oƒXƒLƒbƒv", GetColor(255, 255, 255), ASFont);
+		DrawStringToHandle(1120, 0, "Sã‚­ãƒ¼ã§æ¼”å‡ºã‚¹ã‚­ãƒƒãƒ—", GetColor(255, 255, 255), ASFont);
 	}
 }
 
@@ -85,11 +85,11 @@ void mousethread() {
 void theardCheck() {
 	while (1) {
 		if (steakX[0] >= 380) {
-			AreaCheck(550, 505, 420, 310, 0, true);		//¶‚Ì“÷‚ğ“®‚©‚·‚©ƒ`ƒFƒbƒN
+			AreaCheck(550, 505, 420, 310, 0, true);		//å·¦ã®è‚‰ã‚’å‹•ã‹ã™ã‹ãƒã‚§ãƒƒã‚¯
 			Sleep(5);
 		}
 		if (steakX[2] <= 915) {
-			AreaCheck(805, 745, 420, 310, 2, false);	//‰E‚Ì“÷‚ğ“®‚©‚·‚©ƒ`ƒFƒbƒN
+			AreaCheck(805, 745, 420, 310, 2, false);	//å³ã®è‚‰ã‚’å‹•ã‹ã™ã‹ãƒã‚§ãƒƒã‚¯
 			Sleep(5);
 		}
 
@@ -100,13 +100,21 @@ void theardCheck() {
 void  mouseControl() {
 	while (1) {
 		bool Status = false;
-		if (MouseY <= 340 && MouseY >= 245) {
+		if (MouseY <= 340 && MouseY >= 300) {
 			SetDutyOnCh(1.0, 1.0, 0.0, 0.0, 400);
 			Status = true;
 		}
+		if (MouseY <= 299 && MouseY >= 245) {
+			SetDutyOnCh(0.8, 0.8, 0.0, 0.0, 400);
+			Status = true;
+		}
 
-		if (MouseY >= 380 && MouseY <= 500) {
+		if (MouseY >= 380 && MouseY <= 430) {
 			SetDutyOnCh(0.0, 0.0, 1.0, 1.0, 400);
+			Status = true;
+		}
+		if (MouseY >= 431 && MouseY <= 500) {
+			SetDutyOnCh(0.0, 0.0, 0.8, 0.8, 400);
 			Status = true;
 		}
 
@@ -120,7 +128,7 @@ void  mouseControl() {
 void AppStart() {
 	SetMouseDispFlag(TRUE);
 
-	//‰¹—Ê•ÏX
+	//éŸ³é‡å¤‰æ›´
 	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
@@ -133,13 +141,13 @@ void AppStart() {
 	DWORD checkid;
 	DWORD mouseController;
 
-	/* ƒXƒŒƒbƒh‚Ì¶¬ */
+	/* ã‚¹ãƒ¬ãƒƒãƒ‰ã®ç”Ÿæˆ */
 	Areaload = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)theardCheck, NULL, 0, &checkid);
 	mouseload = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)mousethread, NULL, 0, &checkmouse);
 	mouseControlH = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)mouseControl, NULL, 0, &mouseController);
 
 	while (!ProcessMessage() && !ClearDrawScreen()) {
-		//ªƒƒbƒZ[ƒWˆ— ª‰æ–Ê‚ğƒNƒŠƒA
+		//â†‘ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç† â†‘ç”»é¢ã‚’ã‚¯ãƒªã‚¢
 
 		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) { 
 			SetMinForceDuty(0.2);
@@ -148,7 +156,7 @@ void AppStart() {
 
 		if (CheckHitKey(KEY_INPUT_M) != 0) {
 
-			if ((MessageBox(NULL, TEXT("ƒ^ƒCƒgƒ‹‰æ–Ê‚É–ß‚è‚Ü‚·‚©?"),
+			if ((MessageBox(NULL, TEXT("ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã«æˆ»ã‚Šã¾ã™ã‹?"),
 				TEXT("SteakCut"), MB_YESNO | MB_ICONQUESTION)) == IDYES) {
 				StopSoundMem(Handle);
 				StopSoundMem(Handle1);
@@ -161,18 +169,15 @@ void AppStart() {
 			}
 
 		}
-
-		/*
 		
 		if (AntiMem() == true && DebugMode == false) {
-			MessageBox(NULL, "[ERROR:0003]\n\n•s³‚È‘€ì‚ğŒŸo‚µ‚½‚½‚ßI—¹‚µ‚Ü‚·B", "MW-Secure AntiCheat", MB_OK | MB_ICONSTOP);
+			MessageBox(NULL, "[ERROR:0003]\n\nä¸æ­£ãªæ“ä½œã‚’æ¤œå‡ºã—ãŸãŸã‚çµ‚äº†ã—ã¾ã™ã€‚", "MW-Secure AntiCheat", MB_OK | MB_ICONSTOP);
 			CloseSpidarMouse();
 
 			exit(2);
 		}
-		*/
 
-		//Šeí‰æ‘œ‚Ì“Ç‚İ‚İ
+		//å„ç¨®ç”»åƒã®èª­ã¿è¾¼ã¿
 		DrawRotaGraph(360, 300, 1.0, 0.0, table, TRUE);
 		DrawRotaGraph(650, 450, 1.0, 0.0, imgBack, TRUE);
 		DrawRotaGraph(steakX[0], steakY[0], 0.9, 0.0, imgmiddle[0], TRUE);
@@ -181,24 +186,24 @@ void AppStart() {
 		DrawRotaGraph(MouseX, MouseY, 0.6, 0.0, image, TRUE);
 
 		if (steakX[0] >= 404) {
-			DrawStringToHandle(480, 210, "Ø‚Á‚Ä‚İ‚æ‚¤!", GetColor(255, 255, 0), ASFont);
+			DrawStringToHandle(480, 210, "åˆ‡ã£ã¦ã¿ã‚ˆã†!", GetColor(255, 255, 0), ASFont);
 			DrawTriangleAA(520, 230, 530, 230, 525, 235, GetColor(255, 255, 0), TRUE);
 		}
 
 		if (steakX[2] <= 892) {
-			DrawStringToHandle(725, 210, "Ø‚Á‚Ä‚İ‚æ‚¤!", GetColor(255, 255, 0), ASFont);
+			DrawStringToHandle(725, 210, "åˆ‡ã£ã¦ã¿ã‚ˆã†!", GetColor(255, 255, 0), ASFont);
 			DrawTriangleAA(765, 230, 775, 230, 770, 235, GetColor(255, 255, 0), TRUE);
 		}
 
-		DrawStringToHandle(1155, 0, "RƒL[‚ÅƒŠƒZƒbƒg", GetColor(255, 255, 255), ASFont);
-		DrawStringToHandle(970, 0, "MƒL[‚Åƒ^ƒCƒgƒ‹‚É–ß‚é", GetColor(255, 255, 255), ASFont);
-		DrawStringToHandle(0, 0, "¶ƒNƒŠƒbƒN‚µ‚ÄƒXƒe[ƒL‚ğØ‚èn‚ß‚æ‚¤!", GetColor(255, 255, 0), ASFont);
+		DrawStringToHandle(1155, 0, "Rã‚­ãƒ¼ã§ãƒªã‚»ãƒƒãƒˆ", GetColor(255, 255, 255), ASFont);
+		DrawStringToHandle(970, 0, "Mã‚­ãƒ¼ã§ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹", GetColor(255, 255, 255), ASFont);
+		DrawStringToHandle(0, 0, "å·¦ã‚¯ãƒªãƒƒã‚¯ã—ã¦ã‚¹ãƒ†ãƒ¼ã‚­ã‚’åˆ‡ã‚Šå§‹ã‚ã‚ˆã†!", GetColor(255, 255, 0), ASFont);
 
 		if ((steakX[0] < 380) || (steakX[2] > 915)) {
-			DrawStringToHandle(0, 40, "‚±‚êˆÈãØ‚é‚±‚Æ‚Í‚Å‚«‚Ü‚¹‚ñBRƒL[‚ğ‰Ÿ‚µ‚ÄƒŠƒZƒbƒg‚µ‚Ä‰º‚³‚¢B", GetColor(255, 255, 0), ASFont);
+			DrawStringToHandle(0, 40, "ã“ã‚Œä»¥ä¸Šåˆ‡ã‚‹ã“ã¨ã¯ã§ãã¾ã›ã‚“ã€‚Rã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ãƒªã‚»ãƒƒãƒˆã—ã¦ä¸‹ã•ã„ã€‚", GetColor(255, 255, 0), ASFont);
 		}
 
-		//ƒfƒoƒbƒO—p
+		//ãƒ‡ãƒãƒƒã‚°ç”¨
 		if (DebugMode == true) {
 			OutXYData();
 			PicArea();
@@ -207,10 +212,10 @@ void AppStart() {
 		}
 
 		if (SoundCounter % 600 == 0) {
-			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // Œø‰Ê‰¹‚ğÄ¶‚·‚é
+			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // åŠ¹æœéŸ³ã‚’å†ç”Ÿã™ã‚‹
 		}
-		AudioCheck();	//ƒ}ƒEƒX“®ìŒã‚ÌŒø‰Ê‰¹Ä¶ó‘Ôƒ`ƒFƒbƒN
-		ScreenFlip();//— ‰æ–Ê‚ğ•\‰æ–Ê‚É”½‰f
+		AudioCheck();	//ãƒã‚¦ã‚¹å‹•ä½œå¾Œã®åŠ¹æœéŸ³å†ç”ŸçŠ¶æ…‹ãƒã‚§ãƒƒã‚¯
+		ScreenFlip();//è£ç”»é¢ã‚’è¡¨ç”»é¢ã«åæ˜ 
 
 	}
 }
