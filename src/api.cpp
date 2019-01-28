@@ -37,7 +37,7 @@ bool AntiMem() {
 				CC = SSX[x][y] - steakY[x];
 				SSX[x][y] = steakY[x];
 			}
-			if (CC > 1.0 || CC < -1.0) {
+			if (CC > 2.0 || CC < -2.0) {
 				Cheat = true;
 				break;
 			}
