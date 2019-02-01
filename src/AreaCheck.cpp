@@ -16,17 +16,17 @@ extern int AudioCounter;
 extern bool AudioPlay;
 extern bool clickStatus;
 
-//è‚‰ã‚’åˆ‡ã‚‹ã¨ãã®éŸ³å†ç”Ÿé–¢æ•°
+//“÷‚ðØ‚é‚Æ‚«‚Ì‰¹Ä¶ŠÖ”
 void CutAudioStart() {
-	//é‡è¤‡å†ç”Ÿé˜²æ­¢
+	//d•¡Ä¶–hŽ~
 	if (AudioPlay == false) {
-		//ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã§å†ç”Ÿ
+		//ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh‚ÅÄ¶
 		PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE);
 		AudioPlay = true;
 	}
 }
 
-//è‚‰ã®ç”»åƒã‚’å‹•ã‹ã™é–¢æ•°ã€é–¾å€¤ã®è¨­å®šã€æ–¹å‘è¨­å®š
+//“÷‚Ì‰æ‘œ‚ð“®‚©‚·ŠÖ”Aè‡’l‚ÌÝ’èA•ûŒüÝ’è
 void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 	if ((MouseX > xMin) && (MouseX < xMax) && clickStatus == true) {
 		if ((MouseY > yMin) && (MouseY < yMax)) {
@@ -61,7 +61,7 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 	}
 }
 
-//é‡è¤‡é˜²æ­¢ãƒ•ãƒ©ã‚°ã‚’åˆæœŸçŠ¶æ…‹ã«æˆ»ã™é–¢æ•°
+//d•¡Ä¶–hŽ~ƒtƒ‰ƒO‚ð‰Šúó‘Ô‚É–ß‚·ŠÖ”
 void AudioCheck() {
 	if (AudioPlay == true) {
 		AudioCounter++;

@@ -12,9 +12,9 @@ char Str[256];
 char buf[256];
 
 
-//デバッグ用関数
+//�f�o�b�O�p�֐�
 
-//マウスのXY座標表示関数
+//�}�E�X��XY���W�\���֐�
 void OutXYData() {
 	GetMousePoint(&DMouseX, &DMouseY);
 	DrawStringToHandle(1100, 20, "DEBUG", GetColor(255, 255, 255), ASFont);
@@ -28,7 +28,7 @@ void OutXYData() {
 
 }
 
-//画像の始点座標表示関数
+//�摜�̎n�_���W�\���֐�
 void PicArea() {
 	DrawStringToHandle(1170, 80, "Steak0", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1170, 100, "Steak1", GetColor(255, 255, 255), ASFont);
@@ -42,7 +42,7 @@ void PicArea() {
 	DrawStringToHandle(1230, 120, buf, GetColor(255, 255, 255), ASFont);
 }
 
-//フレームレート表示関数
+//�t���[�����[�g�\���֐�
 void FPSPrint() {
 
 	if (FPSTime_i == 0)
@@ -56,12 +56,12 @@ void FPSPrint() {
 		FPSTime_i++;
 	if (FPS != 0)
 		sprintf(Str, "%.2f", FPS);
-		DrawStringToHandle(1195, 60, "FPS", GetColor(255, 255, 255), ASFont);
-		DrawStringToHandle(1230, 60, Str, GetColor(255, 255, 255), ASFont);
+	DrawStringToHandle(1195, 60, "FPS", GetColor(255, 255, 255), ASFont);
+	DrawStringToHandle(1230, 60, Str, GetColor(255, 255, 255), ASFont);
 	return;
 }
 
-//USBデバイス接続状態強制変更関数
+//USB�f�o�C�X�ڑ���ԕύX�֐�
 void FlagControl() {
 	if (CheckHitKey(KEY_INPUT_D) != 0) {
 		if (DeviceStatus == true) {

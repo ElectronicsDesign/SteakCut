@@ -4,26 +4,26 @@
 
 bool DebugMode = false;
 
-//Mainé–¢æ•°(èµ·å‹•æ™‚ã«å®Ÿè¡Œ)
+//‹N“®‚ÉÀs(mainŠÖ”)
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	SetGraphMode(1280, 800, 32);	//æç”»è¨­å®šã‚’1280 x 800, 32bitã‚«ãƒ©ãƒ¼ã«è¨­å®š
-	SetWindowSize(1280, 800);	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’1280 x 800ã«è¨­å®š
-	SetMainWindowText("SteakCut");	//ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒˆãƒ«ã‚’SteakCutã«è¨­å®š
+	SetGraphMode(1280, 800, 32);	//•`‰æİ’è‚ğ1280 x 800, 32bitƒJƒ‰[‚Éİ’è
+	SetWindowSize(1280, 800);	//ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğ1280 x 800‚Éİ’è
+	SetMainWindowText("SteakCut");	//ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒ^ƒCƒgƒ‹‚ğSteakCut‚Éİ’è
 	SetWindowIconID(101);
 
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK || DxLib_Init() == -1) return -1;
 
-	if((LoadGraphScreen(240, 220, "./img/Devlogo.png", TRUE)) == -1){
-		MessageBox(NULL, "[ERROR : 0000]\n\nãƒ•ã‚¡ã‚¤ãƒ«ãŒä¸æ•´åˆã§ã™ã€‚å†ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¦ãã ã•ã„ã€‚", "EteakCut Start Error", MB_OK | MB_ICONERROR);
+	if ((LoadGraphScreen(240, 220, "./img/Devlogo.png", TRUE)) == -1) {
+		MessageBox(NULL, "[ERROR : 0000]\n\nƒtƒ@ƒCƒ‹‚ª•s®‡‚Å‚·BÄƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢B", "EteakCut Start Error", MB_OK | MB_ICONERROR);
 		exit(9);
 	}
-	DrawString(450, 480, "èµ·å‹•ä¸­ :", GetColor(255, 255, 255));
+	DrawString(450, 480, "‹N“®’† :", GetColor(255, 255, 255));
 	DrawBoxAA(550, 480, 720, 495, GetColor(255, 255, 255), FALSE);
 	LoadGraphScreen(460, 620, "./img/shift.png", TRUE);
 	DrawString(550, 632, "Press Shift to Debug Mode", GetColor(255, 255, 255));
 
-	LoadMem();	//ç”»åƒã€éŸ³æºã‚’ãƒ¡ãƒ¢ãƒªã«å±•é–‹é–‹å§‹
-	MenuOn();	//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã¸é·ç§»
+	LoadMem();	//‰æ‘œA‰¹Œ¹‚ğƒƒ‚ƒŠ‚É“WŠJŠJn
+	MenuOn();	//ƒ^ƒCƒgƒ‹‰æ–Ê‚Ö‘JˆÚ
 
 	return 0;
 }

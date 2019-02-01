@@ -130,7 +130,7 @@ void  mouseControl() {
 	}
 }
 
-//画面のメイン(タイトル画面から呼び出す関数)
+//画面の処理(タイトル画面から呼び出す関数)
 void AppStart() {
 	SetMouseDispFlag(TRUE);
 
