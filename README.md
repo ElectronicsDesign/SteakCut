@@ -6,3 +6,7 @@
 ## 各種ソフトウェアのライセンスについて
 
 [こちら](https://github.com/ElectronicsDesign/SteakCut/blob/morikapu/LISENSE)をご確認下さい。
+
+## 各種マニュアル
+- [アプリケーションマニュアル](https://github.com/tmorio/SteakCut/blob/master/manual/App.md)
+- [ソースコードマニュアル](https://github.com/tmorio/SteakCut/blob/master/manual/Code.md)
