@@ -19,6 +19,7 @@ static double CC;
 extern int SSX[3][2];
 
 
+//メモリの改ざん検証用関数
 bool AntiMem() {
 	CC = 0.0;
 

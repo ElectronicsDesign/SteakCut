@@ -12,6 +12,9 @@ char Str[256];
 char buf[256];
 
 
+//デバッグ用関数
+
+//マウスのXY座標表示関数
 void OutXYData() {
 	GetMousePoint(&DMouseX, &DMouseY);
 	DrawStringToHandle(1100, 20, "DEBUG", GetColor(255, 255, 255), ASFont);
@@ -25,6 +28,7 @@ void OutXYData() {
 
 }
 
+//画像の始点座標表示関数
 void PicArea() {
 	DrawStringToHandle(1170, 80, "Steak0", GetColor(255, 255, 255), ASFont);
 	DrawStringToHandle(1170, 100, "Steak1", GetColor(255, 255, 255), ASFont);
@@ -38,26 +42,28 @@ void PicArea() {
 	DrawStringToHandle(1230, 120, buf, GetColor(255, 255, 255), ASFont);
 }
 
+//フレームレート表示関数
 void FPSPrint() {
 
 	if (FPSTime_i == 0)
-		FPSTime[0] = GetNowCount();               //1周目の時間取得
+		FPSTime[0] = GetNowCount();
 	if (FPSTime_i == 49) {
-		FPSTime[1] = GetNowCount();               //50周目の時間取得
-		FPS = 1000.0f / ((FPSTime[1] - FPSTime[0]) / 50.0f);//測定した値からfpsを計算
-		FPSTime_i = 0;//カウントを初期化
+		FPSTime[1] = GetNowCount();
+		FPS = 1000.0f / ((FPSTime[1] - FPSTime[0]) / 50.0f);
+		FPSTime_i = 0;
 	}
 	else
-		FPSTime_i++;//現在何周目かカウント
+		FPSTime_i++;
 	if (FPS != 0)
 		sprintf(Str, "%.2f", FPS);
-		DrawStringToHandle(1195, 60, "FPS", GetColor(255, 255, 255), ASFont);
-		DrawStringToHandle(1230, 60, Str, GetColor(255, 255, 255), ASFont);
+	DrawStringToHandle(1195, 60, "FPS", GetColor(255, 255, 255), ASFont);
+	DrawStringToHandle(1230, 60, Str, GetColor(255, 255, 255), ASFont);
 	return;
 }
 
+//USBデバイス接続状態変更関数
 void FlagControl() {
-	if (CheckHitKey(KEY_INPUT_D) != 0) { 
+	if (CheckHitKey(KEY_INPUT_D) != 0) {
 		if (DeviceStatus == true) {
 			DeviceStatus = false;
 			Sleep(1 * 100);
