@@ -16,13 +16,17 @@ extern int AudioCounter;
 extern bool AudioPlay;
 extern bool clickStatus;
 
+//肉を切るときの音再生関数
 void CutAudioStart() {
+	//重複再生防止
 	if (AudioPlay == false) {
+		//バックグラウンドで再生
 		PlaySoundMem(Handle1, DX_PLAYTYPE_BACK, FALSE);
 		AudioPlay = true;
 	}
 }
 
+//肉の画像を動かす関数、閾値の設定、方向設定
 void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 	if ((MouseX > xMin) && (MouseX < xMax) && clickStatus == true) {
 		if ((MouseY > yMin) && (MouseY < yMax)) {
@@ -34,7 +38,6 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 				else {
 					steakX[group]++;
 				}
-				
 				counter = 0;
 				CutAudioStart();
 			}
@@ -58,10 +61,11 @@ void AreaCheck(int xMax, int xMin, int yMax, int yMin, int group, bool goLeft) {
 	}
 }
 
+//重複防止フラグを初期状態に戻す関数
 void AudioCheck() {
 	if (AudioPlay == true) {
 		AudioCounter++;
-		if (AudioCounter % 450 == 0) {
+		if (AudioCounter % 340 == 0) {
 			AudioPlay = false;
 			AudioCounter = 0;
 		}

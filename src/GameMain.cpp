@@ -34,6 +34,7 @@ static int SoundCounter = 0;
 extern int Scene;
 extern int ASFont;
 
+//各座標、フラグのリセット
 void ResetArea() {
 	counter = 0;
 	steakX[0] = 406;
@@ -52,6 +53,7 @@ void ResetArea() {
 	clickStatus = false;
 }
 
+//開始用関数(ここでマウスの初期位置を強制的に指定させる)
 void StartSteak() {
 	static int meatAll = LoadGraph("./img/meet_main.png");
 	static int Base = LoadGraph("./img/Main.png");
@@ -76,12 +78,14 @@ void StartSteak() {
 	}
 }
 
+//マウス座標取得させるための関数
 void mousethread() {
 	while (1) {
 		GetMousePoint(&MouseX, &MouseY);
 	}
 }
 
+//肉の画像を動かすか判定させる関数
 void theardCheck() {
 	while (1) {
 		if (steakX[0] >= 380) {
@@ -97,6 +101,7 @@ void theardCheck() {
 	}
 }
 
+//USBデバイスに抵抗を出力させる関数
 void  mouseControl() {
 	while (1) {
 		bool Status = false;
@@ -125,6 +130,7 @@ void  mouseControl() {
 	}
 }
 
+//画面のメイン(タイトル画面から呼び出す関数)
 void AppStart() {
 	SetMouseDispFlag(TRUE);
 
@@ -132,6 +138,7 @@ void AppStart() {
 	ChangeVolumeSoundMem(255 * 30 / 100, Handle);
 	ChangeVolumeSoundMem(255 * 50 / 100, Handle1);
 
+	//マウス初期位置設定
 	StartSteak();
 
 	HANDLE Areaload;
@@ -141,19 +148,19 @@ void AppStart() {
 	DWORD checkid;
 	DWORD mouseController;
 
-	/* スレッドの生成 */
+	// スレッドの生成
 	Areaload = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)theardCheck, NULL, 0, &checkid);
 	mouseload = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)mousethread, NULL, 0, &checkmouse);
 	mouseControlH = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)mouseControl, NULL, 0, &mouseController);
 
 	while (!ProcessMessage() && !ClearDrawScreen()) {
-		//↑メッセージ処理 ↑画面をクリア
 
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) { 
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0) {
 			SetMinForceDuty(0.2);
 			clickStatus = true;
 		}
 
+		//Mキーでタイトル画面に戻るか確認
 		if (CheckHitKey(KEY_INPUT_M) != 0) {
 
 			if ((MessageBox(NULL, TEXT("タイトル画面に戻りますか?"),
@@ -169,7 +176,8 @@ void AppStart() {
 			}
 
 		}
-		
+
+		//メモリの改ざん検知(想定していない画像の動作を防止)
 		if (AntiMem() == true && DebugMode == false) {
 			MessageBox(NULL, "[ERROR:0003]\n\n不正な操作を検出したため終了します。", "MW-Secure AntiCheat", MB_OK | MB_ICONSTOP);
 			CloseSpidarMouse();
@@ -199,11 +207,12 @@ void AppStart() {
 		DrawStringToHandle(970, 0, "Mキーでタイトルに戻る", GetColor(255, 255, 255), ASFont);
 		DrawStringToHandle(0, 0, "左クリックしてステーキを切り始めよう!", GetColor(255, 255, 0), ASFont);
 
+		//一定の位置に達したらRキーを押してリセットするように案内
 		if ((steakX[0] < 380) || (steakX[2] > 915)) {
 			DrawStringToHandle(0, 40, "これ以上切ることはできません。Rキーを押してリセットして下さい。", GetColor(255, 255, 0), ASFont);
 		}
 
-		//デバッグ用
+		//デバッグ用(起動中にShiftキーを押すことで有効化)
 		if (DebugMode == true) {
 			OutXYData();
 			PicArea();
@@ -211,11 +220,11 @@ void AppStart() {
 			FlagControl();
 		}
 
-		if (SoundCounter % 600 == 0) {
+		if (SoundCounter % 560 == 0) {
 			PlaySoundMem(Handle, DX_PLAYTYPE_BACK, FALSE); // 効果音を再生する
 		}
 		AudioCheck();	//マウス動作後の効果音再生状態チェック
-		ScreenFlip();//裏画面を表画面に反映
+		ScreenFlip();	//裏画面を表画面に即反映
 
 	}
 }

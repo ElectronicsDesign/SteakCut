@@ -27,7 +27,7 @@ static int FontControl;
 static int Background;
 static int logo;
 
-
+//カーソル移動関数
 void PointerCtl() {
 
 	if (pointer == 0) {
@@ -41,6 +41,7 @@ void PointerCtl() {
 	}
 }
 
+//タイトル画面の背景出力
 void OutTitle() {
 	DrawRotaGraph(640, 400, 1.0, 0.0, Background, TRUE);
 	DrawRotaGraph(640, 180, 1.0, 0.0, logo, TRUE);
@@ -60,6 +61,7 @@ void OutTitle() {
 	DrawStringToHandle(1210, 780, "Ver 1.9", GetColor(0, 0, 0), ASFont);
 }
 
+//メニュー表示関数
 void Menu() {
 	OutTitle();
 	PointerCtl();
@@ -109,6 +111,7 @@ void Menu() {
 	}
 }
 
+//デバイス管理表示関数
 void DeviceTool() {
 	OutTitle();
 	PointerCtl();
@@ -193,6 +196,7 @@ void DeviceTool() {
 	}
 }
 
+//モーターの動作確認用関数
 void MortorTest() {
 	char idText[10];
 	for (int Counter = 0; Counter < 4; Counter++) {
@@ -225,6 +229,7 @@ void MortorTest() {
 	Scene = eScene_DeviceTool;
 }
 
+//開始画面表示関数
 void Standby() {
 	int counter = 0;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
@@ -256,12 +261,14 @@ void Standby() {
 
 }
 
+//アプリケーション終了関数
 void ExitApp() {
 	CloseSpidarMouse();
 	DxLib_End();
 	exit(0);
 }
 
+//画面切り替え関数
 void MenuOn() {
 	Scene = eScene_Menu;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0) {
@@ -289,6 +296,7 @@ void MenuOn() {
 	}
 }
 
+//画像の展開エラー確認関数
 void LoadCheckImg() {
 	if (table == -1 || image == -1 || imgBack == -1 || Background == -1 || logo == -1 || imgmiddle[0] == -1) {
 		MessageBox(NULL, "[ERROR : 0001]\n\n画像の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
@@ -296,6 +304,7 @@ void LoadCheckImg() {
 	}
 }
 
+//音源の展開エラー確認関数
 void LoadCheckSnd() {
 	if (Handle == -1 || Handle1 == -1) {
 		MessageBox(NULL, "[ERROR : 0002]\n\n音源の展開に失敗しました。\n正しくファイルが配置されているかご確認下さい。", "EteakCut Load Error", MB_OK | MB_ICONERROR);
@@ -303,6 +312,7 @@ void LoadCheckSnd() {
 	}
 }
 
+//フォント設定、外部ファイルをメモリに展開する関数
 void LoadMem() {
 	ScreenFlip();
 	Sleep(5 * 100);
